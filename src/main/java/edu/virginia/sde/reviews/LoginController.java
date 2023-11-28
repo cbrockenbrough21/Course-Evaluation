@@ -19,12 +19,11 @@ public class LoginController {
         //stage.setTitle("Login");
         stage.setScene(scene);
         stage.show();
-        loginService = new LoginService();
+        loginService = new LoginService(); //fix this
     }
 
     public void handleLoginButton() {
-        //Some type of select queries and logic to see
-        //if the user exists and log them in if so
+        boolean userExists = loginService.UsernamePasswordMatches();
 
         // if user does not exist
         handleLoginError();
