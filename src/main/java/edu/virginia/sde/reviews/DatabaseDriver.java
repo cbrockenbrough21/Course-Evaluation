@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.ResultSet;
 
 
 
@@ -19,6 +18,7 @@ public class DatabaseDriver {
             createCoursesTable(statement);
             createReviewsTable(statement);
             statement.close();
+            commit();
 
         } catch(SQLException e){
             e.printStackTrace();
