@@ -14,5 +14,8 @@ public class CourseReviewsApplication extends Application{
         stage.setTitle("Course Reviews");
         stage.setScene(scene);
         stage.show();
+
+        LoginController login = new LoginController();
+        login.displayLogin(stage);
     }
 }
