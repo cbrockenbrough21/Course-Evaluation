@@ -35,4 +35,12 @@ public class LoginController {
 
     //create a function for handling the login button being pressed
         //see if that pair exists in the database, if not prompt an error
+
+    public void handleCreateAccountButton(){
+        //check if username already exists in database
+        //add username and password to database
+
+        //are they logged in now or is the next step for them to log in? show message about this to clarify?
+    }
+
 }
