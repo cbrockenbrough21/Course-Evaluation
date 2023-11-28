@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.virginia.sde.reviews.CourseSearchController">
@@ -19,11 +20,17 @@
                </children>
             </HBox>
             <Label text="Search Warning Message - Will make this invisible later but just to see for now" />
-            <TableView prefHeight="315.0" prefWidth="600.0">
+            <TableView fx:id="tableView" prefHeight="315.0" prefWidth="600.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="Subject" />
-                <TableColumn prefWidth="75.0" text="Number" />
-                  <TableColumn prefWidth="75.0" text="Title" />
+                  <TableColumn text="Subject">
+                      <cellValueFactory><PropertyValueFactory property="subject" />
+                      </cellValueFactory></TableColumn>
+                  <TableColumn text="Course Number">
+                      <cellValueFactory><PropertyValueFactory property="courseNumber" />
+                      </cellValueFactory></TableColumn>
+                  <TableColumn text="Title">
+                      <cellValueFactory><PropertyValueFactory property="title" />
+                      </cellValueFactory></TableColumn>
               </columns>
             </TableView>
          </children>
