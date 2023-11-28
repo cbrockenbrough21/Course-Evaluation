@@ -82,15 +82,26 @@ public class DatabaseDriver {
         statement.executeUpdate(sql3);
     }
 
-    /*private User getUser(ResultSet resultSet){
-
+    private User getUser(ResultSet resultSet) throws SQLException{
+        var id = resultSet.getInt("UserID");
+        var username = resultSet.getString("Username");
+        var password = resultSet.getString("Password");
+        return new User(username, password, id);
     }
 
     public List<User> getAllUsers() throws SQLException{
         if(connection.isClosed()){
             throw new IllegalStateException("Connection to the database is not open");
         }
-
-    }*/
+        PreparedStatement statement = connection.prepareStatement("SELECT * from Users");
+        var users = new ArrayList<User>();
+        ResultSet resultSet = statement.executeQuery();
+        while(resultSet.next()){
+            var user = getUser(resultSet);
+            users.add(user);
+        }
+        statement.close();
+        return users;
+    }
 }
 
