@@ -1,10 +1,7 @@
 package edu.virginia.sde.reviews;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-
+import java.sql.*;
+import java.util.*;
 
 
 public class DatabaseDriver {
@@ -84,5 +81,16 @@ public class DatabaseDriver {
                 "FOREIGN KEY (CourseID) REFERENCES Courses(CourseID) ON DELETE CASCADE)";
         statement.executeUpdate(sql3);
     }
+
+    /*private User getUser(ResultSet resultSet){
+
+    }
+
+    public List<User> getAllUsers() throws SQLException{
+        if(connection.isClosed()){
+            throw new IllegalStateException("Connection to the database is not open");
+        }
+
+    }*/
 }
 
