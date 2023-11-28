@@ -23,6 +23,14 @@ public class CourseSearchController {
         //updateTable();
     }
 
+    public void handleLogOutButton(){
+        //scene switch to log in page
+    }
+
+    public void handleMyReviewsButton(){
+        //scene switch to MyReviews page
+    }
+
     private void updateTable(){
         List<Course> courseList = new ArrayList<>();
         Course myCourse = new Course("CS", 2100, "DSA1");
