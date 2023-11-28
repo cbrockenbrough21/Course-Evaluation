@@ -9,7 +9,7 @@ public class CourseReviewsApplication extends Application{
     public static void main(String[] args){launch(args);}
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-search.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-review.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Course Reviews");
         stage.setScene(scene);
