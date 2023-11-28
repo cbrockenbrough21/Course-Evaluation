@@ -8,8 +8,8 @@
    <children>
       <VBox layoutX="2.0" layoutY="5.0" prefHeight="394.0" prefWidth="600.0">
          <children>
-            <Button mnemonicParsing="false" text="Log Out" onAction="#handleLogOutButton"/>
-            <Button mnemonicParsing="false" text="My Reviews" onAction="#handleMyReviewsButton"/>
+            <Button mnemonicParsing="false" onAction="#handleLogOutButton" text="Log Out" />
+            <Button mnemonicParsing="false" onAction="#handleMyReviewsButton" text="My Reviews" />
             <Button mnemonicParsing="false" text="Add course" />
             <HBox prefHeight="79.0" prefWidth="600.0">
                <children>
@@ -28,10 +28,10 @@
                   <TableColumn text="Subject">
                       <cellValueFactory><PropertyValueFactory property="subject" />
                       </cellValueFactory></TableColumn>
-                  <TableColumn text="Course Number">
+                  <TableColumn text="Number">
                       <cellValueFactory><PropertyValueFactory property="courseNumber" />
                       </cellValueFactory></TableColumn>
-                  <TableColumn text="Title">
+                  <TableColumn prefWidth="237.0" text="Title">
                       <cellValueFactory><PropertyValueFactory property="title" />
                       </cellValueFactory></TableColumn>
               </columns>
