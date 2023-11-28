@@ -9,8 +9,9 @@
          <children>
             <TextField text="Username" />
             <TextField text="Password" />
-            <Button mnemonicParsing="false" text="Login" />
+            <Button onAction="#handleLoginButton" mnemonicParsing="false" text="Login" />
          </children>
       </FlowPane>
+      <Label fx:id="loginError" layoutX="285.0" layoutY="23.0" />
    </children>
 </AnchorPane>
