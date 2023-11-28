@@ -4,7 +4,7 @@
 ## Authors
 1) Riley Wilson, nvf5kp, rileywilson7
 2) Catherine Brockenbrough, cqt5de, cbrockenbrough21
-3) Name, netid, [GitHub profile name]
+3) Laine Quillian, zcx6na, [zcx6na]
 4) Name, netid, [GitHub profile name]
 
 ## To Run
@@ -27,7 +27,7 @@ List the primary contributions of each author. It is recommended to update this 
 * as a bulleted list
 * each line starts with an asterisk and a space
 
-### [Author 3 - replace this with their name]
+### Laine Quillian
 
 * Author 3 contributions
 * as a bulleted list
