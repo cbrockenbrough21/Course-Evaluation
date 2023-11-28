@@ -11,11 +11,13 @@ public class CourseSearchApplication extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage primaryStage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-search.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Course Search");
-        stage.setScene(scene);
-        stage.show();
+        var scene = new Scene(fxmlLoader.load());
+        var controller = (CourseSearchController) fxmlLoader.getController();
+        controller.setPrimaryStage(primaryStage);
+        primaryStage.setTitle("Course Search");
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 }

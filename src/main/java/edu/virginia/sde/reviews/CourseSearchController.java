@@ -7,13 +7,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CourseSearchController {
     @FXML
     private TableView<Course> tableView;
+    private Stage primaryStage;
+
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
 
     public void initialize(){
         updateTable();
@@ -25,10 +34,28 @@ public class CourseSearchController {
 
     public void handleLogOutButton(){
         //scene switch to log in page
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            primaryStage.setTitle("Login");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void handleMyReviewsButton(){
         //scene switch to MyReviews page
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("my-reviews.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            primaryStage.setTitle("My Reviews");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void updateTable(){
