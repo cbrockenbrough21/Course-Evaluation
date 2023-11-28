@@ -41,6 +41,12 @@ public class LoginController {
         //add username and password to database
 
         //are they logged in now or is the next step for them to log in? show message about this to clarify?
+        handleCreateAccountError();
+    }
+
+    public void handleCreateAccountError(){
+        loginError.setStyle("-fx-text-fill: red;");
+        loginError.setText("Invalid Username or Password. Please try again.");
     }
 
 }
