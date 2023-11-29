@@ -76,6 +76,23 @@ public class DatabaseConnection {
         }
     }
 
+    public void addUser(String username, String password) throws SQLException{
+        try{
+            var addStatement = connection.prepareStatement(
+                    """
+                            INSERT INTO Users(Username, Password)
+                            VALUES(?, ?)""");
+            addStatement.setString(1, username);
+            addStatement.setString(2, password);
+
+            int rowsAdded = addStatement.executeUpdate();
+            addStatement.close();
+        } catch(SQLException e){
+            connection.rollback();
+            throw(e);
+        }
+    }
+
     public void disconnect() throws SQLException {
         connection.close();
     }

@@ -18,7 +18,7 @@ public class LoginController {
     public TextField password;
 
     private User activeUser;
-    LoginService loginService;
+    //LoginService loginService;
 
     private Stage primaryStage;
 
@@ -32,7 +32,7 @@ public class LoginController {
         //stage.setTitle("Login");
         stage.setScene(scene);
         stage.show();
-        loginService = new LoginService(); //fix this
+        var loginService = new LoginService(); //fix this
     }
 
     public void handleLoginButton() {
@@ -57,6 +57,8 @@ public class LoginController {
 
         // if user does not exist
         try {
+            var loginService = new LoginService();
+            loginService.save();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-search.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             var controller = (CourseSearchController) fxmlLoader.getController();
