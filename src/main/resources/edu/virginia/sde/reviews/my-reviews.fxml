@@ -6,6 +6,6 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.virginia.sde.reviews.MyReviewsController">
    <children>
-      <Button layoutX="43.0" layoutY="47.0" mnemonicParsing="false" text="Back" />
+      <Button mnemonicParsing="false" onAction="#handleBackButton" text="Back" layoutX="43.0" layoutY="47.0"/>
    </children>
 </AnchorPane>
