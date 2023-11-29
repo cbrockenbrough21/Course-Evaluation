@@ -37,6 +37,8 @@ public class CourseSearchController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
+            var controller = (LoginController) fxmlLoader.getController();
+            controller.setPrimaryStage(primaryStage);
             primaryStage.setTitle("Login");
             primaryStage.setScene(scene);
             primaryStage.show();
@@ -50,6 +52,8 @@ public class CourseSearchController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("my-reviews.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
+            var controller = (MyReviewsController) fxmlLoader.getController();
+            controller.setPrimaryStage(primaryStage);
             primaryStage.setTitle("My Reviews");
             primaryStage.setScene(scene);
             primaryStage.show();

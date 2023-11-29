@@ -18,6 +18,8 @@ public class MyReviewsController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-search.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
+            var controller = (CourseSearchController) fxmlLoader.getController();
+            controller.setPrimaryStage(primaryStage);
             primaryStage.setTitle("Course Search");
             primaryStage.setScene(scene);
             primaryStage.show();
