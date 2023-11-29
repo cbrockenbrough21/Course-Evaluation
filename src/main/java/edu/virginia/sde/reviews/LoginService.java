@@ -1,6 +1,7 @@
 package edu.virginia.sde.reviews;
 
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 public class LoginService {
     public void save(){
@@ -43,6 +44,33 @@ public class LoginService {
                     databaseConnection.disconnect();
                 }
             } catch(SQLException e){
+                throw new RuntimeException();
+            }
+        }
+    }
+
+    //basically just checking for that specific exception to be thrown if I try to add I think?
+        //return true if successful add, return false if username was already in database
+    public boolean addIfNotExists(String username, String password){
+        DatabaseConnection databaseConnection = null;
+
+        try{
+            databaseConnection = new DatabaseConnection();
+            try{
+                databaseConnection.addUser(username, password);
+                return true;
+            } catch(SQLIntegrityConstraintViolationException e){
+                return false;
+            }
+
+        } catch (SQLException e){
+            throw new RuntimeException();
+        } finally {
+            try {
+                if (databaseConnection != null) {
+                    databaseConnection.disconnect();
+                }
+            } catch (SQLException e) {
                 throw new RuntimeException();
             }
         }
