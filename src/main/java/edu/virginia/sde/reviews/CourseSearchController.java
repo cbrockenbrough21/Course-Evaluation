@@ -3,6 +3,12 @@ package edu.virginia.sde.reviews;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.TableView;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
@@ -103,6 +109,7 @@ public class CourseSearchController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("my-reviews.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             var controller = (MyReviewsController) fxmlLoader.getController();
+            controller.setActiveUser(activeUser);
             controller.setPrimaryStage(primaryStage);
             primaryStage.setTitle("My Reviews");
             primaryStage.setScene(scene);
@@ -126,9 +133,23 @@ public class CourseSearchController {
         }
     }
 
+    public void handleCourseClicked() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-review.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            var controller = (CourseReviewsController) fxmlLoader.getController();
+            controller.setPrimaryStage(primaryStage);
+            primaryStage.setTitle("Course Reviews");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private void updateTable(){
         List<Course> courseList = new ArrayList<>();
-        Course myCourse = new Course("CS", 2100, "DSA1", 4.5);
+        Course myCourse = new Course("CS", 2100, "DSA1");
         courseList.add(myCourse);
 
         ObservableList<Course> obsList = FXCollections.observableList(courseList);

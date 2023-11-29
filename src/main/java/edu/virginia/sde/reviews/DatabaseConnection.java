@@ -94,6 +94,26 @@ public class DatabaseConnection {
         }
     }
 
+    public void addCourse(String subject, int course_number, String title) throws SQLException {
+        try {
+            PreparedStatement statement = connection.prepareStatement(
+                    """
+                            INSERT INTO COURSES(subject, course_number, title)
+                            VALUES(?, ?, ?)
+                        """
+            );
+            statement.setString(1, subject);
+            statement.setInt(2, course_number);
+            statement.setString(3, title);
+            statement.executeUpdate();
+            statement.close();
+            connection.commit();
+        } catch (SQLException e) {
+            connection.rollback();
+            throw e;
+        }
+    }
+
     public String getPasswordByUsername(String givenUsername) throws SQLException{
         try{
             var statement = connection.prepareStatement(
