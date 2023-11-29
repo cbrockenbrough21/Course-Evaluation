@@ -27,7 +27,11 @@ public class LoginService {
         try {
             databaseConnection = new DatabaseConnection();
             String databasePassword = databaseConnection.getPasswordByUsername(username);
-            if(databasePassword.equals(password)){
+            if(databasePassword == null){
+                return false;
+            }
+            else if(databasePassword.equals(password)){
+                //System.out.println("got to this line");
                 return true;
             }
             return false;

@@ -39,7 +39,10 @@ public class LoginController {
     public void handleLoginButton() {
         var loginService = new LoginService();
         String enteredUsername = username.getText();
-        String enteredPassword = username.getText();
+        String enteredPassword = password.getText();
+
+        //System.out.println(enteredUsername);
+        //System.out.println(enteredPassword);
 
         if(enteredPassword.equals("") || enteredUsername.equals("")){
             handleLoginError();
@@ -49,27 +52,24 @@ public class LoginController {
             boolean matches = loginService.UsernamePasswordMatches(enteredUsername, enteredPassword);
             if(matches){
                 //log them in, so scene switch to the course review page
+                try {
+                    loginService = new LoginService();
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-search.fxml"));
+                    Scene scene = new Scene(fxmlLoader.load());
+                    var controller = (CourseSearchController) fxmlLoader.getController();
+                    controller.setActiveUser(activeUser);
+                    controller.setPrimaryStage(primaryStage);
+                    primaryStage.setTitle("Course Search");
+                    primaryStage.setScene(scene);
+                    primaryStage.show();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
             else{
                 handleLoginError();
                 return;
             }
-        }
-
-        //this code goes into the if statement when they match I think
-        try {
-            loginService = new LoginService();
-            loginService.save();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-search.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            var controller = (CourseSearchController) fxmlLoader.getController();
-            controller.setActiveUser(activeUser);
-            controller.setPrimaryStage(primaryStage);
-            primaryStage.setTitle("Course Search");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 
