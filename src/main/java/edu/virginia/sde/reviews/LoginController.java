@@ -3,13 +3,18 @@ package edu.virginia.sde.reviews;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class LoginController {
 
     @FXML
     public Label loginError;
+    @FXML
+    public TextField username;
+    @FXML
+    public TextField password;
+
     private User activeUser;
     LoginService loginService;
 
@@ -23,7 +28,23 @@ public class LoginController {
     }
 
     public void handleLoginButton() {
-        boolean userExists = loginService.UsernamePasswordMatches();
+        String enteredUsername = username.getText();
+        String enteredPassword = username.getText();
+
+        if(enteredPassword.equals("") || enteredUsername.equals("")){
+            handleCreateAccountError();
+            return;
+        }
+        else{
+            boolean matches = loginService.UsernamePasswordMatches(enteredUsername, enteredPassword);
+            if(matches){
+                //log them in, so scene switch to the course review page
+            }
+            else{
+                handleLoginError();
+                return;
+            }
+        }
 
         // if user does not exist
         handleLoginError();
