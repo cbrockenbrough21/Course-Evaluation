@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.virginia.sde.reviews.CourseSearchController">
    <children>
       <VBox layoutX="2.0" layoutY="5.0" prefHeight="394.0" prefWidth="600.0">
          <children>
+            <Button mnemonicParsing="false" onAction="#handleLogOutButton" text="Log Out" />
+            <Button mnemonicParsing="false" onAction="#handleMyReviewsButton" text="My Reviews" />
+            <Button mnemonicParsing="false" onAction="#handleAddCourseButton" text="Add course" />
             <HBox prefHeight="79.0" prefWidth="600.0">
                <children>
                   <Label text="Subject" />
@@ -15,15 +19,21 @@
                   <TextField prefHeight="26.0" prefWidth="94.0" />
                   <Label text="Title" />
                   <TextField />
-                  <Button mnemonicParsing="false" text="Search" onAction="#handleSearchButton"/>
+                  <Button mnemonicParsing="false" onAction="#handleSearchButton" text="Search" />
                </children>
             </HBox>
             <Label text="Search Warning Message - Will make this invisible later but just to see for now" />
-            <TableView prefHeight="315.0" prefWidth="600.0">
+            <TableView fx:id="tableView" prefHeight="315.0" prefWidth="600.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="Subject" />
-                <TableColumn prefWidth="75.0" text="Number" />
-                  <TableColumn prefWidth="75.0" text="Title" />
+                  <TableColumn text="Subject">
+                      <cellValueFactory><PropertyValueFactory property="subject" />
+                      </cellValueFactory></TableColumn>
+                  <TableColumn text="Number">
+                      <cellValueFactory><PropertyValueFactory property="courseNumber" />
+                      </cellValueFactory></TableColumn>
+                  <TableColumn prefWidth="237.0" text="Title">
+                      <cellValueFactory><PropertyValueFactory property="title" />
+                      </cellValueFactory></TableColumn>
               </columns>
             </TableView>
          </children>
