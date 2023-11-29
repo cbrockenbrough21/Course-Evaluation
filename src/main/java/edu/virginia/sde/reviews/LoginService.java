@@ -3,6 +3,7 @@ package edu.virginia.sde.reviews;
 import java.sql.SQLException;
 
 public class LoginService {
+    /*
     //function that will get all the users and return true or false if the user/password combo is present
     public boolean UsernamePasswordMatches(String username, String password) {
         DatabaseConnection databaseConnection = null;
@@ -14,7 +15,7 @@ public class LoginService {
             }
             else if(databasePassword.equals(password)){
                 return true;
-            }*/
+            }
             return true;
         } catch (SQLException e) {
             //rollback changes?
@@ -28,5 +29,5 @@ public class LoginService {
                 throw new RuntimeException();
             }
         }
-    }
+    }*/
 }

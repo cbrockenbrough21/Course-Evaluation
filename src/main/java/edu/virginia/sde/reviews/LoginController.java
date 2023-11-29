@@ -36,6 +36,7 @@ public class LoginController {
     }
 
     public void handleLoginButton() {
+        /*
         String enteredUsername = username.getText();
         String enteredPassword = username.getText();
 
@@ -52,7 +53,7 @@ public class LoginController {
                 handleLoginError();
                 return;
             }
-        }
+        }*/
 
         // if user does not exist
         try {
