@@ -62,10 +62,25 @@ public class CourseSearchController {
         }
     }
 
+    public void handleAddCourseButton(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("add-course.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            var controller = (AddCourseController) fxmlLoader.getController();
+            controller.setPrimaryStage(primaryStage);
+            primaryStage.setTitle("Add Course");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private void updateTable(){
         List<Course> courseList = new ArrayList<>();
         Course myCourse = new Course("CS", 2100, "DSA1");
         courseList.add(myCourse);
+
         ObservableList<Course> obsList = FXCollections.observableList(courseList);
         tableView.getItems().clear();
         tableView.getItems().addAll(obsList);

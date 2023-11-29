@@ -10,7 +10,7 @@
          <children>
             <Button mnemonicParsing="false" onAction="#handleLogOutButton" text="Log Out" />
             <Button mnemonicParsing="false" onAction="#handleMyReviewsButton" text="My Reviews" />
-            <Button mnemonicParsing="false" text="Add course" />
+            <Button mnemonicParsing="false" onAction="#handleAddCourseButton" text="Add course" />
             <HBox prefHeight="79.0" prefWidth="600.0">
                <children>
                   <Label text="Subject" />
