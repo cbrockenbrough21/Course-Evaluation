@@ -7,7 +7,7 @@ public class LoginService {
         DatabaseConnection databaseConnection = null;
         try {
             databaseConnection = new DatabaseConnection();
-            databaseConnection.addUser("rileywilson", "blahblah");
+            databaseConnection.addUser("riley", "blahblah");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -20,22 +20,18 @@ public class LoginService {
             }
         }
     }
-    /*
+
     //function that will get all the users and return true or false if the user/password combo is present
     public boolean UsernamePasswordMatches(String username, String password) {
         DatabaseConnection databaseConnection = null;
         try {
             databaseConnection = new DatabaseConnection();
-            /*String databasePassword = DatabaseConnection.getPasswordByUsername(username);
-            if(databasePassword.equals(null)){
-                return false; //or could make this more specific to mean they aren't in the database at all
-            }
-            else if(databasePassword.equals(password)){
+            String databasePassword = databaseConnection.getPasswordByUsername(username);
+            if(databasePassword.equals(password)){
                 return true;
             }
-            return true;
+            return false;
         } catch (SQLException e) {
-            //rollback changes?
             throw new RuntimeException();
         } finally{
             try{
@@ -46,5 +42,5 @@ public class LoginService {
                 throw new RuntimeException();
             }
         }
-    }*/
+    }
 }

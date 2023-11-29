@@ -19,10 +19,13 @@ public class CourseSearchController {
     @FXML
     private TableView<Course> tableView;
     private Stage primaryStage;
+    private User activeUser;
 
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
+
+    public void setActiveUser(User activeUser) { this.activeUser = activeUser; }
 
     public void initialize(){
         updateTable();

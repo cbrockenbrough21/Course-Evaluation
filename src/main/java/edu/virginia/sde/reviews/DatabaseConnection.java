@@ -94,6 +94,25 @@ public class DatabaseConnection {
         }
     }
 
+    public String getPasswordByUsername(String givenUsername) throws SQLException{
+        try{
+            var statement = connection.prepareStatement(
+                    """
+                            SELECT * FROM Users WHERE Username = ?
+                            """);
+            statement.setString(1, givenUsername);
+            ResultSet rs = statement.executeQuery();
+            String password = null;
+            while(rs.next()){
+                password = rs.getString("Password");
+            }
+            return password;
+        } catch(SQLException e){
+            connection.rollback();
+            throw(e);
+        }
+    }
+
     public void disconnect() throws SQLException {
         connection.close();
     }

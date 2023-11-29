@@ -18,13 +18,14 @@ public class LoginController {
     public TextField password;
 
     private User activeUser;
-    //LoginService loginService;
 
     private Stage primaryStage;
 
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
+
+    public void setActiveUser(User activeUser){ this.activeUser = activeUser; }
 
     public void displayLogin(Stage stage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
@@ -36,12 +37,12 @@ public class LoginController {
     }
 
     public void handleLoginButton() {
-        /*
+        var loginService = new LoginService();
         String enteredUsername = username.getText();
         String enteredPassword = username.getText();
 
         if(enteredPassword.equals("") || enteredUsername.equals("")){
-            handleCreateAccountError();
+            handleLoginError();
             return;
         }
         else{
@@ -53,15 +54,16 @@ public class LoginController {
                 handleLoginError();
                 return;
             }
-        }*/
+        }
 
-        // if user does not exist
+        //this code goes into the if statement when they match I think
         try {
-            var loginService = new LoginService();
+            loginService = new LoginService();
             loginService.save();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-search.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             var controller = (CourseSearchController) fxmlLoader.getController();
+            controller.setActiveUser(activeUser);
             controller.setPrimaryStage(primaryStage);
             primaryStage.setTitle("Course Search");
             primaryStage.setScene(scene);
