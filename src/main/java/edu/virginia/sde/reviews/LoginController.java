@@ -83,17 +83,20 @@ public class LoginController {
         //this function will be in our LoginService file, we will just call it here and use the result to change the display
 
     public void handleCreateAccountButton(){
-        //do this in the service file
-            //check if username already exists in database
-            //add username and password to database
-
-        //are they logged in now or is the next step for them to log in? show message about this to clarify?
-        handleCreateAccountError();
-    }
-
-    public void handleCreateAccountError(){
-        loginError.setStyle("-fx-text-fill: red;");
-        loginError.setText("Invalid Username or Password. Please try again.");
+        //leads to a popup window where they enter password/username
+        try {
+            var loginService = new LoginService();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("create-user.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            var controller = (CreateUserController) fxmlLoader.getController();
+            controller.setActiveUser(activeUser);
+            controller.setPrimaryStage(primaryStage);
+            primaryStage.setTitle("Course Search");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

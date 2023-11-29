@@ -3,7 +3,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.virginia.sde.reviews.MyReviewsController">
    <children>
@@ -24,10 +23,6 @@
                 </cellValueFactory></TableColumn>
         </columns>
       </TableView>
-      <TextField alignment="CENTER" layoutX="219.0" layoutY="28.0" text="My Reviews">
-         <font>
-            <Font name="System Font" size="14.0" />
-         </font>
-      </TextField>
+      <Label layoutX="284.0" layoutY="40.0" text="My Reviews" />
    </children>
 </AnchorPane>

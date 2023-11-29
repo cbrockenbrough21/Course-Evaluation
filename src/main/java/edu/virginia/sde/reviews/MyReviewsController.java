@@ -19,6 +19,9 @@ public class MyReviewsController {
     @FXML
     private TableView<Review> tableView;
 
+    private User activeUser;
+
+    public void setActiveUser(User activeUser) { this.activeUser = activeUser; }
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
@@ -31,6 +34,7 @@ public class MyReviewsController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-search.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             var controller = (CourseSearchController) fxmlLoader.getController();
+            controller.setActiveUser(activeUser);
             controller.setPrimaryStage(primaryStage);
             primaryStage.setTitle("Course Search");
             primaryStage.setScene(scene);
@@ -40,8 +44,12 @@ public class MyReviewsController {
         }
     }
 
+    public String getActiveUsername(User activeUser) {return activeUser.getUsername(); }
+
     private void updateTable() {
         //eventually this will be querying a database but for now hard-coded
+
+
         List<Review> myReviewList = new ArrayList<>();
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         Review myReview = new Review("CS", 2100, 3.0, timestamp.toString());
