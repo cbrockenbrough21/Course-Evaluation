@@ -106,7 +106,6 @@ public class DatabaseDriver {
 
     //returns a String of the password for that specific username if it is in the database
         //if it isn't in the database, it returns null
-        //throws an exception if there is more than one of that username in the database
     public String getPasswordByUsername(String givenUsername) throws SQLException{
         if(connection.isClosed()){
             throw new IllegalStateException("Connection to the database is not open");
@@ -116,14 +115,9 @@ public class DatabaseDriver {
         statement.setString(1, givenUsername);
         ResultSet resultSet = statement.executeQuery();
 
-        int count = 0;
         String password = null;
         while(resultSet.next()){
-            count ++;
             password = resultSet.getString("Password");
-        }
-        if(count > 1){
-            throw new SQLException("More than one instance of this Username in the database")
         }
         return password;
     }

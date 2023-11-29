@@ -6,8 +6,13 @@ public class LoginService {
 
     private final DatabaseDriver databaseDriver;
 
-    public LoginService(DatabaseDriver databaseDriver){
-        this.databaseDriver = databaseDriver;
+    public LoginService(){
+        databaseDriver = new DatabaseDriver();
+        try{
+            databaseDriver.connect();
+        }
+        catch(SQLException e){
+        }
     }
 
     //function that will get all the users and return true or false if the user/password combo is present
