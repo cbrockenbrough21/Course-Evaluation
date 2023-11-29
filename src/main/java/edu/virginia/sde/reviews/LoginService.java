@@ -7,7 +7,7 @@ public class LoginService {
         DatabaseConnection databaseConnection = null;
         try {
             databaseConnection = new DatabaseConnection();
-            databaseConnection.addUser("owarren", "blahblah");
+            databaseConnection.addUser("rileywilson", "blahblah");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
