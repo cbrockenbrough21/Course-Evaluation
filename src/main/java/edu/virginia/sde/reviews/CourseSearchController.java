@@ -59,7 +59,7 @@ public class CourseSearchController {
                     if (!row.isEmpty() && event.getClickCount() == 1) {
                         Course rowData = row.getItem();
                         // Handle the row click event here
-                        System.out.println("Clicked on row with title: " + rowData.getTitle());
+                        handleRowClick(rowData);
                     }
                 });
                 return row;
@@ -133,23 +133,9 @@ public class CourseSearchController {
         }
     }
 
-    public void handleCourseClicked() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-review.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            var controller = (CourseReviewsController) fxmlLoader.getController();
-            controller.setPrimaryStage(primaryStage);
-            primaryStage.setTitle("Course Reviews");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     private void updateTable(){
         List<Course> courseList = new ArrayList<>();
-        Course myCourse = new Course("CS", 2100, "DSA1");
+        Course myCourse = new Course("CS", 2100, "DSA1", 2.1);
         courseList.add(myCourse);
 
         ObservableList<Course> obsList = FXCollections.observableList(courseList);
