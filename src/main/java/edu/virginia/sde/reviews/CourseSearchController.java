@@ -81,7 +81,7 @@ public class CourseSearchController {
 
     private void updateTable(){
         List<Course> courseList = new ArrayList<>();
-        Course myCourse = new Course("CS", 2100, "DSA1");
+        Course myCourse = new Course("CS", 2100, "DSA1", 4.5);
         courseList.add(myCourse);
 
         ObservableList<Course> obsList = FXCollections.observableList(courseList);
