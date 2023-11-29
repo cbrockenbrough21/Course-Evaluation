@@ -87,6 +87,7 @@ public class DatabaseConnection {
 
             int rowsAdded = addStatement.executeUpdate();
             addStatement.close();
+            connection.commit();
         } catch(SQLException e){
             connection.rollback();
             throw(e);
