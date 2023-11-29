@@ -6,12 +6,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class LoginController {
 
     @FXML
     public Label loginError;
     private User activeUser;
     LoginService loginService;
+
+    private Stage primaryStage;
+
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
 
     public void displayLogin(Stage stage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
@@ -27,7 +35,17 @@ public class LoginController {
         //if the user exists and log them in if so
 
         // if user does not exist
-        handleLoginError();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-search.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            var controller = (CourseSearchController) fxmlLoader.getController();
+            controller.setPrimaryStage(primaryStage);
+            primaryStage.setTitle("Course Search");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void handleLoginError() {
