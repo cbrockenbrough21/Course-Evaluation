@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.virginia.sde.reviews.AddCourseController">
+   <children>
+      <VBox layoutX="55.0" layoutY="60.0" prefHeight="302.0" prefWidth="521.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#handleBackButton" text="Back" />
+            <HBox prefHeight="64.0" prefWidth="618.0">
+               <children>
+                  <Label text="Subject" />
+                  <TextField fx:id="subject" prefHeight="26.0" prefWidth="90.0" />
+                  <Label text="Course Number" />
+                  <TextField fx:id="courseNumber" prefHeight="26.0" prefWidth="103.0" />
+                  <Label text="Title" />
+                  <TextField fx:id="title" prefHeight="26.0" prefWidth="173.0" />
+               </children>
+            </HBox>
+            <Button mnemonicParsing="false" onAction="#handleAddCourse" text="Add Course" />
+            <Label fx:id="courseAddLabel" text="Add course label" visible="false" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
