@@ -17,8 +17,11 @@ public class CreateUserController {
     public TextField password;
     @FXML
     public Label createAccountLabel;
+    private User activeUser;
 
     public void setPrimaryStage(Stage primaryStage) { this.primaryStage = primaryStage; }
+
+    public void setActiveUser(User activeUser) { this.activeUser = activeUser; }
 
     public void handleCreateAccountButton(){
         var loginService = new LoginService();
@@ -58,7 +61,19 @@ public class CreateUserController {
     }
 
     public void handleBackButton(){
-
+        try {
+            var loginService = new LoginService();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            var controller = (LoginController) fxmlLoader.getController();
+            controller.setActiveUser(activeUser);
+            controller.setPrimaryStage(primaryStage);
+            primaryStage.setTitle("Course Search");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

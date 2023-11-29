@@ -84,22 +84,19 @@ public class LoginController {
 
     public void handleCreateAccountButton(){
         //leads to a popup window where they enter password/username
-        var loginService = new LoginService();
-        String enteredUsername = username.getText();
-        String enteredPassword = password.getText();
-        boolean successfulAdd = loginService.addIfNotExists(enteredUsername, enteredPassword);
-
-        if(successfulAdd){
-            //log them in?
+        try {
+            var loginService = new LoginService();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("create-user.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            var controller = (CreateUserController) fxmlLoader.getController();
+            controller.setActiveUser(activeUser);
+            controller.setPrimaryStage(primaryStage);
+            primaryStage.setTitle("Course Search");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-
-        //are they logged in now or is the next step for them to log in? show message about this to clarify?
-        handleCreateAccountError();
-    }
-
-    public void handleCreateAccountError(){
-        loginError.setStyle("-fx-text-fill: red;");
-        loginError.setText("Invalid Username or Password. Please try again.");
     }
 
 }
