@@ -78,10 +78,6 @@ public class LoginController {
         loginError.setText("Incorrect Username or Password. Please try again.");
     }
 
-    //create a function for handling the login button being pressed
-        //see if that pair exists in the database, if not prompt an error
-        //this function will be in our LoginService file, we will just call it here and use the result to change the display
-
     public void handleCreateAccountButton(){
         //leads to a popup window where they enter password/username
         try {
