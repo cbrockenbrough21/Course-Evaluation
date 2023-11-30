@@ -11,8 +11,11 @@ public class CourseReviewsController {
 
     private User activeUser;
 
+    private Course activeCourse;
+
     private Stage primaryStage;
     public void setActiveUser(User activeUser) { this.activeUser = activeUser; }
+    public void setActiveCourse(Course activeCourse){this.activeCourse = activeCourse;}
 
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
