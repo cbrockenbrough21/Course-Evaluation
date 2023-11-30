@@ -212,7 +212,6 @@ public class DatabaseConnection {
     }
 
     public void disconnect() throws SQLException {
-        System.out.println("connection closes");
         connection.close();
     }
 }
