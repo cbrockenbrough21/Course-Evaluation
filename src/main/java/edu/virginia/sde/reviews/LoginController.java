@@ -85,7 +85,6 @@ public class LoginController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("create-user.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             var controller = (CreateUserController) fxmlLoader.getController();
-            controller.setActiveUser(activeUser);
             controller.setPrimaryStage(primaryStage);
             primaryStage.setTitle("Course Search");
             primaryStage.setScene(scene);

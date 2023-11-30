@@ -21,8 +21,6 @@ public class CreateUserController {
 
     public void setPrimaryStage(Stage primaryStage) { this.primaryStage = primaryStage; }
 
-    public void setActiveUser(User activeUser) { this.activeUser = activeUser; }
-
     public void handleCreateAccountButton(){
         var loginService = new LoginService();
         String enteredUsername = username.getText();
@@ -40,6 +38,7 @@ public class CreateUserController {
         boolean successfulAdd = loginService.addIfNotExists(enteredUsername, enteredPassword);
 
         if(successfulAdd){
+            activeUser = new User(enteredUsername, enteredPassword, )
             handleAccountCreated();
             return;
         }

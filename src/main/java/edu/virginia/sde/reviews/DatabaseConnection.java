@@ -137,6 +137,46 @@ public class DatabaseConnection {
         }
     }
 
+    public int getUserIDByUsername(String givenUsername) throws SQLException{
+        try{
+            var statement = connection.prepareStatement(
+                    """
+                            SELECT UserID FROM Users WHERE Username = ?
+                            """);
+            statement.setString(1, givenUsername);
+            ResultSet rs = statement.executeQuery();
+            int userID = -1;
+            while(rs.next()){
+                userID = rs.getInt("UserID");
+            }
+            return userID;
+        } catch(SQLException e){
+            connection.rollback();
+            throw(e);
+        }
+    }
+
+    public int getCourseID(String subject, int number, String title) throws SQLException{
+        try{
+            var statement = connection.prepareStatement(
+                    """
+                            SELECT CourseID FROM Courses WHERE Subject = ? AND Number = ? AND Title = ?
+                            """);
+            statement.setString(1, subject);
+            statement.setInt(2, number);
+            statement.setString(3, title);
+            ResultSet rs = statement.executeQuery();
+            int courseID = -1;
+            while(rs.next()){
+                courseID = rs.getInt("CourseID");
+            }
+            return courseID;
+        } catch(SQLException e){
+            connection.rollback();
+            throw(e);
+        }
+    }
+
     //Search classes by different combinations of subject, number, and title
     public List<Course> searchCourses(String subject, Integer number, String title) throws SQLException {
         StringBuilder sql = new StringBuilder("SELECT * FROM Courses WHERE 1=1");
