@@ -7,6 +7,11 @@ public class Course {
 
     private double rating;
 
+    public Course(String subject, int courseNumber, String title) {
+        this.subject = subject;
+        this.courseNumber = courseNumber;
+        this.title = title;
+    }
     public Course(String subject, int courseNumber, String title, double rating) {
         this.subject = subject;
         this.courseNumber = courseNumber;

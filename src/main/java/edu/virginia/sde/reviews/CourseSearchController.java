@@ -11,10 +11,12 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CourseSearchController {
+    DatabaseConnection databaseConnection;
     @FXML
     private TableView<Course> tableView;
 
@@ -39,6 +41,11 @@ public class CourseSearchController {
     public void setActiveUser(User activeUser) { this.activeUser = activeUser; }
 
     public void initialize(){
+        try {
+            databaseConnection = new DatabaseConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         tableView.setRowFactory(tableView -> {
             TableRow<Course> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
@@ -126,10 +133,12 @@ public class CourseSearchController {
     }
 
     private void updateTable(){
-        List<Course> courseList = new ArrayList<>();
-        Course myCourse = new Course("CS", 2100, "DSA1", 2.1);
-        courseList.add(myCourse);
-
+        List<Course> courseList = null;
+        try {
+            courseList = databaseConnection.getAllCourses();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         ObservableList<Course> obsList = FXCollections.observableList(courseList);
         tableView.getItems().clear();
         tableView.getItems().addAll(obsList);
