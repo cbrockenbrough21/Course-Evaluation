@@ -2,13 +2,15 @@ package edu.virginia.sde.reviews;
 
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginService {
-    public void save(){
+    public void save() {
         DatabaseConnection databaseConnection = null;
         try {
             databaseConnection = new DatabaseConnection();
-            databaseConnection.addUser("hey", "blahblah");
+            databaseConnection.addUser("riley", "blahblah");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -28,42 +30,41 @@ public class LoginService {
         try {
             databaseConnection = new DatabaseConnection();
             String databasePassword = databaseConnection.getPasswordByUsername(username);
-            if(databasePassword == null){
+            if (databasePassword == null) {
                 return false;
-            }
-            else if(databasePassword.equals(password)){
+            } else if (databasePassword.equals(password)) {
                 //System.out.println("got to this line");
                 return true;
             }
             return false;
         } catch (SQLException e) {
             throw new RuntimeException();
-        } finally{
-            try{
-                if(databaseConnection != null){
+        } finally {
+            try {
+                if (databaseConnection != null) {
                     databaseConnection.disconnect();
                 }
-            } catch(SQLException e){
+            } catch (SQLException e) {
                 throw new RuntimeException();
             }
         }
     }
 
     //basically just checking for that specific exception to be thrown if I try to add I think?
-        //return true if successful add, return false if username was already in database
-    public boolean addIfNotExists(String username, String password){
+    //return true if successful add, return false if username was already in database
+    public boolean addIfNotExists(String username, String password) {
         DatabaseConnection databaseConnection = null;
 
-        try{
+        try {
             databaseConnection = new DatabaseConnection();
-            try{
+            try {
                 databaseConnection.addUser(username, password);
                 return true;
-            } catch(SQLIntegrityConstraintViolationException e){
+            } catch (SQLIntegrityConstraintViolationException e) {
                 return false;
             }
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw new RuntimeException();
         } finally {
             try {

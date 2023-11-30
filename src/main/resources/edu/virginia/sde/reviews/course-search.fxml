@@ -11,17 +11,17 @@
             <Button mnemonicParsing="false" onAction="#handleLogOutButton" text="Log Out" />
             <Button mnemonicParsing="false" onAction="#handleMyReviewsButton" text="My Reviews" />
             <Button mnemonicParsing="false" onAction="#handleAddCourseButton" text="Add course" />
-            <HBox prefHeight="79.0" prefWidth="600.0">
-               <children>
-                  <Label text="Subject" />
-                  <TextField prefHeight="26.0" prefWidth="84.0" />
-                  <Label text="Number" />
-                  <TextField prefHeight="26.0" prefWidth="94.0" />
-                  <Label text="Title" />
-                  <TextField />
-                  <Button mnemonicParsing="false" onAction="#handleSearchButton" text="Search" />
-               </children>
-            </HBox>
+             <HBox prefHeight="79.0" prefWidth="600.0">
+                 <children>
+                     <Label text="Subject" />
+                     <TextField fx:id="subjectTextField" prefHeight="26.0" prefWidth="84.0" />
+                     <Label text="Number" />
+                     <TextField fx:id="numberTextField" prefHeight="26.0" prefWidth="94.0" />
+                     <Label text="Title" />
+                     <TextField fx:id="titleTextField" />
+                     <Button mnemonicParsing="false" onAction="#handleSearchButton" text="Search" />
+                 </children>
+             </HBox>
             <Label text="Search Warning Message - Will make this invisible later but just to see for now" />
             <TableView fx:id="tableView" prefHeight="315.0" prefWidth="600.0">
               <columns>

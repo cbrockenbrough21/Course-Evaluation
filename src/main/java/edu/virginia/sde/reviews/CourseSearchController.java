@@ -1,6 +1,7 @@
 package edu.virginia.sde.reviews;
 
 import javafx.collections.FXCollections;
+import javafx.scene.control.TextField;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
@@ -25,6 +26,15 @@ import java.util.List;
 public class CourseSearchController {
     @FXML
     private TableView<Course> tableView;
+
+    @FXML
+    private TextField subjectTextField;
+
+    @FXML
+    private TextField numberTextField;
+
+    @FXML
+    private TextField titleTextField;
 
 //    @FXML
 //    private TableColumn<Course, String> subjectColumn;
@@ -65,7 +75,7 @@ public class CourseSearchController {
                 return row;
             }
         });
-        updateTable();
+        //updateTable();
     }
 
     private void handleRowClick(Course selectedCourse){
@@ -83,9 +93,19 @@ public class CourseSearchController {
         System.out.println("Clicked on row with title: " + selectedCourse.getTitle());
     }
 
+    //Makes courses pop up given any combo of title, subject, and number
+    //Display the list of courses given the current subject, number, title in the text boxes
     public void handleSearchButton(){
-        //logic for search for anything in all three of the fields
-        //updateTable();
+        String subject = subjectTextField.getText();
+        Integer number = Integer.parseInt(numberTextField.getText());
+        String title = titleTextField.getText();
+
+        CourseSearchService courseSearchService = new CourseSearchService();
+        List<Course> searchResults = courseSearchService.findAllCourses(subject, number, title);
+
+        ObservableList<Course> obsList = FXCollections.observableList(searchResults);
+        tableView.getItems().clear();
+        tableView.getItems().addAll(obsList);
     }
 
     public void handleLogOutButton(){
@@ -147,13 +167,13 @@ public class CourseSearchController {
         }
     }
 
-    private void updateTable(){
-        List<Course> courseList = new ArrayList<>();
-        Course myCourse = new Course("CS", 2100, "DSA1");
-        courseList.add(myCourse);
+   // private void updateTable(){
+      //  List<Course> courseList = new ArrayList<>();
+       // Course myCourse = new Course("CS", 2100, "DSA1");
+       // courseList.add(myCourse);
 
-        ObservableList<Course> obsList = FXCollections.observableList(courseList);
-        tableView.getItems().clear();
-        tableView.getItems().addAll(obsList);
-    }
+       // ObservableList<Course> obsList = FXCollections.observableList(courseList);
+       // tableView.getItems().clear();
+        //tableView.getItems().addAll(obsList);
+   // }
 }

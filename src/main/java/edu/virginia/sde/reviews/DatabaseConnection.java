@@ -2,6 +2,8 @@ package edu.virginia.sde.reviews;
 
 
 import java.sql.*;
+import java.util.List;
+import java.util.ArrayList;
 
 public class DatabaseConnection {
     public static final String DATABASE_CONNECTION = "jdbc:sqlite:course_reviews.sqlite";
@@ -130,6 +132,58 @@ public class DatabaseConnection {
         } catch(SQLException e){
             connection.rollback();
             throw(e);
+        }
+    }
+
+    //Search classes by different combinations of subject, number, and title
+    public List<Course> searchCourses(String subject, Integer number, String title) throws SQLException {
+        StringBuilder sql = new StringBuilder("SELECT * FROM Courses WHERE 1=1");
+
+        if (subject != null && !subject.isEmpty()) {
+            sql.append(" AND Subject = ?");
+        }
+
+        if (number != null) {
+            sql.append(" AND Number = ?");
+        }
+
+        if (title != null && !title.isEmpty()) {
+            sql.append(" AND Title LIKE ?");
+        }
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql.toString())) {
+            int paramIndex = 1;
+
+            if (subject != null && !subject.isEmpty()) {
+                stmt.setString(paramIndex++, subject);
+            }
+
+            if (number != null) {
+                stmt.setInt(paramIndex++, number);
+            }
+
+            if (title != null && !title.isEmpty()) {
+                stmt.setString(paramIndex++, "%" + title + "%");
+            }
+
+            ResultSet rs = stmt.executeQuery();
+
+            List<Course> courses = new ArrayList<>();
+
+            while (rs.next()) {
+                String retrievedSubject = rs.getString("Subject");
+                int retrievedNumber = rs.getInt("Number");
+                String retrievedTitle = rs.getString("Title");
+                int retrievedRating = rs.getInt("Rating");
+
+                Course course = new Course(retrievedSubject, retrievedNumber, retrievedTitle,retrievedRating);
+                courses.add(course);
+            }
+
+            return courses;
+        } catch (SQLException e) {
+            connection.rollback();
+            throw (e);
         }
     }
 
