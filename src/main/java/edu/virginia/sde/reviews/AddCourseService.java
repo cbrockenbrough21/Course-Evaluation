@@ -26,9 +26,10 @@ public class AddCourseService {
             try {
                 databaseConnection.addCourse(subject, course_number, title);
                 return true;
-            } catch(SQLIntegrityConstraintViolationException e) {
+            } catch (SQLIntegrityConstraintViolationException e) {
                 return false;
             }
+
         } catch (SQLException e) {
             throw new RuntimeException();
         } finally {
@@ -39,6 +40,6 @@ public class AddCourseService {
             } catch (SQLException e) {
                 throw new RuntimeException();
             }
-       }
+        }
     }
 }
