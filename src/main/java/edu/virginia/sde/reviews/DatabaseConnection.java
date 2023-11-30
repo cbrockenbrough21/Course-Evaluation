@@ -110,7 +110,7 @@ public class DatabaseConnection {
             connection.commit();
         } catch (SQLException e) {
             connection.rollback();
-            throw e;
+            throw new SQLIntegrityConstraintViolationException();
         }
     }
 
