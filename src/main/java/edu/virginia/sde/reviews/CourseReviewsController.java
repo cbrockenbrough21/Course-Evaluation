@@ -19,11 +19,30 @@ public class CourseReviewsController {
     @FXML
     private TableView<Review> tableView;
 
+    @FXML
+    private RadioButton rating1;
+
+    @FXML
+    private RadioButton rating2;
+
+    @FXML
+    private RadioButton rating3;
+
+    @FXML
+    private RadioButton rating4;
+
+    @FXML
+    private RadioButton rating5;
+
+    @FXML
+    private TextField comment;
+
     private User activeUser;
 
     private Course activeCourse;
 
     private Stage primaryStage;
+    private ToggleGroup buttonGroup;
 
     public void setActiveUser(User activeUser) { this.activeUser = activeUser; }
 
@@ -36,6 +55,13 @@ public class CourseReviewsController {
     public void initialize(){
         var courseReviewsService = new CourseReviewsService();
         courseReviewsService.initialize();
+
+        buttonGroup = new ToggleGroup();
+        rating1.setToggleGroup(buttonGroup);
+        rating2.setToggleGroup(buttonGroup);
+        rating3.setToggleGroup(buttonGroup);
+        rating4.setToggleGroup(buttonGroup);
+        rating5.setToggleGroup(buttonGroup);
     }
 
     public void updateTable(){
@@ -68,7 +94,11 @@ public class CourseReviewsController {
     }
 
     public void handleSubmitReviewButton(){
-        addCourseReview();
+        CourseReviewsService courseReviewsService = new CourseReviewsService();
+        var toggle = (RadioButton) buttonGroup.getSelectedToggle();
+        String choice = toggle.getText();
+        String commentString = comment.getText();
+        courseReviewsService.addReview(choice, commentString);
     }
 
 

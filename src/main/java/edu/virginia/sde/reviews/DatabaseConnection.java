@@ -118,6 +118,10 @@ public class DatabaseConnection {
         }
     }
 
+    public void addReview(){
+
+    }
+
     public String getPasswordByUsername(String givenUsername) throws SQLException{
         try{
             var statement = connection.prepareStatement(
