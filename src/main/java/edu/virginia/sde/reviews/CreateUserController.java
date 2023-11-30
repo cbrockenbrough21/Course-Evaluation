@@ -38,7 +38,8 @@ public class CreateUserController {
         boolean successfulAdd = loginService.addIfNotExists(enteredUsername, enteredPassword);
 
         if(successfulAdd){
-            activeUser = new User(enteredUsername, enteredPassword, )
+            int userID = loginService.getUserID(enteredUsername);
+            activeUser = new User(enteredUsername, enteredPassword, userID);
             handleAccountCreated();
             return;
         }

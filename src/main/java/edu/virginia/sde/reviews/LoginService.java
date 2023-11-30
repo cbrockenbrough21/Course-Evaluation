@@ -74,4 +74,22 @@ public class LoginService {
             }
         }
     }
+
+    public int getUserID(String username){
+        DatabaseConnection databaseConnection = null;
+        try {
+            databaseConnection = new DatabaseConnection();
+            return databaseConnection.getUserIDByUsername(username);
+        } catch (SQLException e) {
+            throw new RuntimeException();
+        } finally {
+            try {
+                if (databaseConnection != null) {
+                    databaseConnection.disconnect();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException();
+            }
+        }
+    }
 }
