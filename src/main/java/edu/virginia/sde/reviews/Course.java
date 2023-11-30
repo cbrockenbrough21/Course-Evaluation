@@ -47,4 +47,9 @@ public class Course {
     public void setRating(double rating) {
         this.rating = rating;
     }
+
+    @Override
+    public String toString() {
+        return subject + " " + courseNumber + ": " + title;
+    }
 }
