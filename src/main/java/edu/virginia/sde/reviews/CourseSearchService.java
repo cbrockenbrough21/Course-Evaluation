@@ -13,7 +13,8 @@ public class CourseSearchService {
             List<Course> courses = databaseConnection.searchCourses(subject, number, title);
             return courses;
         } catch (SQLException e) {
-            throw new RuntimeException();
+            e.printStackTrace();
+            throw new RuntimeException("Error while searching for courses", e);
         } finally {
             try {
                 if (databaseConnection != null) {

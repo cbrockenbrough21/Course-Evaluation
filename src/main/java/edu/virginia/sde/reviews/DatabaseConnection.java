@@ -174,9 +174,8 @@ public class DatabaseConnection {
                 String retrievedSubject = rs.getString("Subject");
                 int retrievedNumber = rs.getInt("Number");
                 String retrievedTitle = rs.getString("Title");
-                int retrievedRating = rs.getInt("Rating");
 
-                Course course = new Course(retrievedSubject, retrievedNumber, retrievedTitle,retrievedRating);
+                Course course = new Course(retrievedSubject, retrievedNumber, retrievedTitle);
                 courses.add(course);
             }
 

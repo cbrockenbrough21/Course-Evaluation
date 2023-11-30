@@ -18,6 +18,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import java.lang.reflect.InvocationTargetException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -96,16 +97,21 @@ public class CourseSearchController {
     //Makes courses pop up given any combo of title, subject, and number
     //Display the list of courses given the current subject, number, title in the text boxes
     public void handleSearchButton(){
-        String subject = subjectTextField.getText();
-        Integer number = Integer.parseInt(numberTextField.getText());
-        String title = titleTextField.getText();
+        try{
+            String subject = subjectTextField.getText();
+            Integer number = numberTextField.getText().isEmpty() ? null : Integer.parseInt(numberTextField.getText());
+            String title = titleTextField.getText();
 
-        CourseSearchService courseSearchService = new CourseSearchService();
-        List<Course> searchResults = courseSearchService.findAllCourses(subject, number, title);
+            CourseSearchService courseSearchService = new CourseSearchService();
+            List<Course> searchResults = courseSearchService.findAllCourses(subject, number, title);
 
-        ObservableList<Course> obsList = FXCollections.observableList(searchResults);
-        tableView.getItems().clear();
-        tableView.getItems().addAll(obsList);
+            ObservableList<Course> obsList = FXCollections.observableList(searchResults);
+            tableView.getItems().clear();
+            tableView.getItems().addAll(obsList);
+        } catch (Exception e) {
+            // Print or log details of the underlying exception
+            e.printStackTrace();
+        }
     }
 
     public void handleLogOutButton(){

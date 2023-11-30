@@ -5,15 +5,12 @@ public class Course {
     private int courseNumber;
     private String title;
 
-    private double rating;
 
 
-
-    public Course(String subject, int courseNumber, String title, double rating) {
+    public Course(String subject, int courseNumber, String title) {
         this.subject = subject;
         this.courseNumber = courseNumber;
         this.title = title;
-        this.rating = rating;
     }
 
     public String getSubject() {
@@ -40,11 +37,4 @@ public class Course {
         this.title = title;
     }
 
-    public double getRating() {
-        return rating;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
-    }
 }

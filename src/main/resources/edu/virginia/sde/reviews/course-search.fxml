@@ -34,9 +34,6 @@
                   <TableColumn prefWidth="237.0" text="Title">
                       <cellValueFactory><PropertyValueFactory property="title" />
                       </cellValueFactory></TableColumn>
-                  <TableColumn prefWidth="237.0" text="Rating">
-                      <cellValueFactory><PropertyValueFactory property="rating" />
-                      </cellValueFactory></TableColumn>
               </columns>
             </TableView>
          </children>
