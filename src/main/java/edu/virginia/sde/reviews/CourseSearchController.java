@@ -30,9 +30,7 @@ public class CourseSearchController {
 
     @FXML
     private TextField titleTextField;
-
     private Course activeCourse;
-
     private Stage primaryStage;
     private User activeUser;
 
@@ -42,7 +40,6 @@ public class CourseSearchController {
 
     public void setActiveUser(User activeUser) { this.activeUser = activeUser; }
 
-    public void setActiveCourse(Course activeCourse) { this.activeCourse = activeCourse; }
     public void initialize(){
         try {
             databaseConnection = new DatabaseConnection();
@@ -145,20 +142,8 @@ public class CourseSearchController {
     }
 
     private void updateTable(){
-        List<Course> courseList = null;
-        try {
-            courseList = databaseConnection.getAllCourses();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            try {
-                if (databaseConnection != null) {
-                    databaseConnection.disconnect();
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException();
-            }
-        }
+        var courseSearchService = new CourseSearchService();
+        List<Course> courseList = courseSearchService.getCourses();
         ObservableList<Course> obsList = FXCollections.observableList(courseList);
         tableView.getItems().clear();
         tableView.getItems().addAll(obsList);

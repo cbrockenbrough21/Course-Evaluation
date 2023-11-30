@@ -37,7 +37,7 @@ public class AddCourseController{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-search.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             var controller = (CourseSearchController) fxmlLoader.getController();
-            controller.setActiveCourse(activeCourse);
+            //controller.setActiveCourse(activeCourse);
             controller.setPrimaryStage(primaryStage);
             primaryStage.setTitle("Course Search");
             primaryStage.setScene(scene);
