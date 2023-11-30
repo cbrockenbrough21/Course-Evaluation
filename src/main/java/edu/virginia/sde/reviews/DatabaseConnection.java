@@ -19,7 +19,6 @@ public class DatabaseConnection {
         createUsersTables();
         createCoursesTables();
         createReviewsTables();
-
     }
 
     private void createUsersTables() throws SQLException {
@@ -45,9 +44,9 @@ public class DatabaseConnection {
                     """
                                 CREATE TABLE IF NOT EXISTS COURSES (
                                 CourseID INTEGER PRIMARY KEY,
-                                Subject TEXT CHECK(length(Subject) >= 2 AND length(Subject) <= 4),
-                                Number INTEGER CHECK(length(number) == 4),
-                                Title TEXT CHECK(length(Title) >= 1 AND length(Title) <= 50)
+                                Subject TEXT NOT NULL,
+                                Number INTEGER NOT NULL,
+                                Title TEXT UNIQUE NOT NULL
                             );
                             """);
             statement.executeUpdate();
@@ -89,8 +88,7 @@ public class DatabaseConnection {
                             VALUES(?, ?)""");
             addStatement.setString(1, username);
             addStatement.setString(2, password);
-
-            int rowsAdded = addStatement.executeUpdate();
+            addStatement.executeUpdate();
             addStatement.close();
             connection.commit();
         } catch(SQLException e){
@@ -101,19 +99,22 @@ public class DatabaseConnection {
 
     public void addCourse(String subject, int course_number, String title) throws SQLException {
         try {
-            PreparedStatement statement = connection.prepareStatement(
+            var statement = connection.prepareStatement(
                     """
-                            INSERT INTO COURSES(subject, course_number, title)
+                            INSERT INTO COURSES(subject, number, title)
                             VALUES(?, ?, ?)
                         """
             );
             statement.setString(1, subject);
             statement.setInt(2, course_number);
             statement.setString(3, title);
-            statement.executeUpdate();
+            int rows = statement.executeUpdate();
             statement.close();
+            System.out.println("closed");
             connection.commit();
+            System.out.println("committed");
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             connection.rollback();
             throw new SQLIntegrityConstraintViolationException();
         }
@@ -211,6 +212,7 @@ public class DatabaseConnection {
     }
 
     public void disconnect() throws SQLException {
+        System.out.println("connection closes");
         connection.close();
     }
 }
