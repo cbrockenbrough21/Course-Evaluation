@@ -1,9 +1,12 @@
 package edu.virginia.sde.reviews;
 
 
+import javax.security.auth.Subject;
 import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseConnection {
     public static final String DATABASE_CONNECTION = "jdbc:sqlite:course_reviews.sqlite";
@@ -92,7 +95,7 @@ public class DatabaseConnection {
             connection.commit();
         } catch(SQLException e){
             connection.rollback();
-            throw(e);
+            throw new SQLIntegrityConstraintViolationException();
         }
     }
 
@@ -112,7 +115,7 @@ public class DatabaseConnection {
             connection.commit();
         } catch (SQLException e) {
             connection.rollback();
-            throw e;
+            throw new SQLIntegrityConstraintViolationException();
         }
     }
 
@@ -183,6 +186,27 @@ public class DatabaseConnection {
         } catch (SQLException e) {
             connection.rollback();
             throw (e);
+        }
+    }
+
+    public List<Course> getAllCourses() throws SQLException{
+        List<Course> allCourses = new ArrayList<>();
+        try{
+            var statement = connection.prepareStatement(
+                    """
+                            SELECT * FROM Courses
+                            """);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()){
+                String subject = rs.getString("subject");
+                int number = rs.getInt("number");
+                String title = rs.getString("title");
+                allCourses.add(new Course(subject, number, title));
+            }
+            return allCourses;
+        } catch(SQLException e){
+            connection.rollback();
+            throw(e);
         }
     }
 

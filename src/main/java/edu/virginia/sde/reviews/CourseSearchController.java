@@ -4,27 +4,21 @@ import javafx.collections.FXCollections;
 import javafx.scene.control.TextField;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.TableView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import java.lang.reflect.InvocationTargetException;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CourseSearchController {
+    DatabaseConnection databaseConnection;
     @FXML
     private TableView<Course> tableView;
 
@@ -58,25 +52,22 @@ public class CourseSearchController {
     public void setActiveUser(User activeUser) { this.activeUser = activeUser; }
 
     public void initialize(){
-        tableView.setRowFactory(new Callback<TableView<Course>, TableRow<Course>>() {
-//            subjectColumn.setCellValueFactory(new PropertyValueFactory<>("subject"));
-//            numberColumn.setCellValueFactory(new PropertyValueFactory<>("courseNumber"));
-//            titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-//            ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
-            @Override
-            public TableRow<Course> call(TableView<Course> tableView) {
-                final TableRow<Course> row = new TableRow<>();
-                row.setOnMouseClicked(event -> {
-                    if (!row.isEmpty() && event.getClickCount() == 1) {
-                        Course rowData = row.getItem();
-                        // Handle the row click event here
-                        System.out.println("Clicked on row with title: " + rowData.getTitle());
-                    }
-                });
-                return row;
-            }
+        try {
+            databaseConnection = new DatabaseConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        tableView.setRowFactory(tableView -> {
+            TableRow<Course> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (!row.isEmpty() && event.getClickCount() == 1) {
+                    Course rowData = row.getItem();
+                    handleRowClick(rowData);
+                }
+            });
+            return row;
         });
-        //updateTable();
+        updateTable();
     }
 
     private void handleRowClick(Course selectedCourse){
@@ -84,14 +75,16 @@ public class CourseSearchController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-review.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             var controller = (CourseReviewsController) fxmlLoader.getController();
+            controller.setActiveCourse(selectedCourse);
+            controller.setActiveUser(activeUser);
             controller.setPrimaryStage(primaryStage);
             primaryStage.setTitle("Course Review");
             primaryStage.setScene(scene);
+            controller.setActiveCourseLabel();
             primaryStage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Clicked on row with title: " + selectedCourse.getTitle());
     }
 
     //Makes courses pop up given any combo of title, subject, and number
@@ -109,7 +102,6 @@ public class CourseSearchController {
             tableView.getItems().clear();
             tableView.getItems().addAll(obsList);
         } catch (Exception e) {
-            // Print or log details of the underlying exception
             e.printStackTrace();
         }
     }
@@ -159,27 +151,15 @@ public class CourseSearchController {
         }
     }
 
-    public void handleCourseClicked() {
+    private void updateTable(){
+        List<Course> courseList = null;
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-review.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            var controller = (CourseReviewsController) fxmlLoader.getController();
-            controller.setPrimaryStage(primaryStage);
-            primaryStage.setTitle("Course Reviews");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (IOException e) {
+            courseList = databaseConnection.getAllCourses();
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        ObservableList<Course> obsList = FXCollections.observableList(courseList);
+        tableView.getItems().clear();
+        tableView.getItems().addAll(obsList);
     }
-
-   // private void updateTable(){
-      //  List<Course> courseList = new ArrayList<>();
-       // Course myCourse = new Course("CS", 2100, "DSA1");
-       // courseList.add(myCourse);
-
-       // ObservableList<Course> obsList = FXCollections.observableList(courseList);
-       // tableView.getItems().clear();
-        //tableView.getItems().addAll(obsList);
-   // }
 }

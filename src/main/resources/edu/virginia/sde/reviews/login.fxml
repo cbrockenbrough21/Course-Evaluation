@@ -24,6 +24,6 @@
                    <Button mnemonicParsing="false" onAction="#handleCreateAccountButton" text="Create New User" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
-      <Label fx:id="loginError" layoutX="285.0" layoutY="23.0" />
+      <Label fx:id="loginError" layoutX="190.0" layoutY="275.0" />
    </children>
 </AnchorPane>

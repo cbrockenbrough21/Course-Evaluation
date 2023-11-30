@@ -5,7 +5,7 @@
 1) Riley Wilson, nvf5kp, rileywilson7
 2) Catherine Brockenbrough, cqt5de, cbrockenbrough21
 3) Laine Quillian, zcx6na, [zcx6na]
-4) Name, netid, [GitHub profile name]
+4) Olivia Warren, rgx6mx, owarren22
 
 ## To Run
 
@@ -33,7 +33,7 @@ List the primary contributions of each author. It is recommended to update this 
 * as a bulleted list
 * each line starts with an asterisk and a space
 
-### [Author 4 - replace this with their name]
+### Olivia Warren
 
 * Author 4 contributions
 * as a bulleted list
