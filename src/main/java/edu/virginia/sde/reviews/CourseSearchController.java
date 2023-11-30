@@ -157,6 +157,14 @@ public class CourseSearchController {
             courseList = databaseConnection.getAllCourses();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            try {
+                if (databaseConnection != null) {
+                    databaseConnection.disconnect();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException();
+            }
         }
         ObservableList<Course> obsList = FXCollections.observableList(courseList);
         tableView.getItems().clear();

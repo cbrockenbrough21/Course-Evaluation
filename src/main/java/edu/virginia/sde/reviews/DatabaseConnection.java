@@ -110,9 +110,7 @@ public class DatabaseConnection {
             statement.setString(3, title);
             int rows = statement.executeUpdate();
             statement.close();
-            System.out.println("closed");
             connection.commit();
-            System.out.println("committed");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             connection.rollback();

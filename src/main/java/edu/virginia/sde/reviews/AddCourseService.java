@@ -2,6 +2,7 @@ package edu.virginia.sde.reviews;
 
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class AddCourseService {
@@ -23,12 +24,12 @@ public class AddCourseService {
         DatabaseConnection databaseConnection = null;
         try {
             databaseConnection = new DatabaseConnection();
-            try {
+            List<Course> allCourses = databaseConnection.getAllCourses();
+            if (!isCourseInDatabase(allCourses, subject, course_number, title)) {
                 databaseConnection.addCourse(subject, course_number, title);
                 return true;
-            } catch (SQLIntegrityConstraintViolationException e) {
-                return false;
             }
+                return false;
 
         } catch (SQLException e) {
             throw new RuntimeException();
@@ -41,5 +42,14 @@ public class AddCourseService {
                 throw new RuntimeException();
             }
         }
+    }
+
+    public boolean isCourseInDatabase(List<Course> allCourses, String subject, int course_number, String title) {
+        for (Course course : allCourses) {
+            if (!(course.getSubject().equals(subject) && !(course.getTitle().equals(title)))) {
+                return true;
+            }
+        }
+        return false;
     }
 }

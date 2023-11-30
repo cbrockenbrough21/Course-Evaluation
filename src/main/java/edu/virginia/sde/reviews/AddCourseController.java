@@ -52,16 +52,20 @@ public class AddCourseController{
         boolean validCourse = addCourseService.isValidSubject(subjectString) &&
                               addCourseService.isValidCourseNumber(numberString) &&
                               addCourseService.isValidTitle(titleString);
+        if (!validCourse) {
+            courseAddLabel.setText("Unable to add the course because invalid input. Please try again. ");
+            courseAddLabel.setVisible(true);
+        }
         if (validCourse) {
             int course_number = Integer.parseInt(numberString);
             boolean successfulAdd = addCourseService.addIfNotExists(subjectString, course_number, titleString);
             if (successfulAdd) {
                 handleCourseAdded();
             }
-        }
-        else {
-            courseAddLabel.setText("Unable to add the course because invalid input. Please try again. ");
-            courseAddLabel.setVisible(true);
+            else {
+                courseAddLabel.setText("The course already exists. Please visit Course from Course Search.");
+                courseAddLabel.setVisible(true);
+            }
         }
     }
     public void handleCourseAdded() {
