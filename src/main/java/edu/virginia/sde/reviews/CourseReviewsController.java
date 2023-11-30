@@ -76,7 +76,10 @@ public class CourseReviewsController {
         }
     }
 
-    public Course getActiveCourse(){
-        return activeCourse;
+    public void handleSubmitReviewButton(){
+        addCourseReview();
     }
+
+
+
 }
