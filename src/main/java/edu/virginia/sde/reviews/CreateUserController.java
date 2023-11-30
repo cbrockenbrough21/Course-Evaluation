@@ -32,6 +32,10 @@ public class CreateUserController {
             handleInvalidEntryError();
             return;
         }
+        else if(enteredUsername.equals("") || enteredPassword.equals("")){
+            handleInvalidEntryError();
+            return;
+        }
 
         boolean successfulAdd = loginService.addIfNotExists(enteredUsername, enteredPassword);
 
