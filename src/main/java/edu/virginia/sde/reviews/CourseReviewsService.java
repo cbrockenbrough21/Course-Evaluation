@@ -30,9 +30,8 @@ public class CourseReviewsService {
 
     public void addReview(String choice, String comment){
         int rating = getRating(choice);
-        DatabaseConnection databaseConnection = null;
         try {
-            databaseConnection = new DatabaseConnection();
+            DatabaseConnection databaseConnection = new DatabaseConnection();
             databaseConnection.addReview();
         } catch (SQLException e) {
             throw new RuntimeException(e);
