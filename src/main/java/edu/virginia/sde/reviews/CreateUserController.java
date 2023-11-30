@@ -38,12 +38,14 @@ public class CreateUserController {
         }
 
         boolean successfulAdd = loginService.addIfNotExists(enteredUsername, enteredPassword);
+        System.out.println("got to this line");
 
         if(successfulAdd){
             handleAccountCreated();
             return;
         }
         else{
+            System.out.println("got to this line");
             handleUserExistsError();
             return;
         }
