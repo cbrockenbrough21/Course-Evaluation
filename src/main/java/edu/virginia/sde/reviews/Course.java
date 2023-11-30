@@ -7,11 +7,21 @@ public class Course {
 
     private double rating;
 
+    private int courseId;
+
     public Course(String subject, int courseNumber, String title) {
         this.subject = subject;
         this.courseNumber = courseNumber;
         this.title = title;
     }
+    public Course(String subject, int courseNumber, String title, int courseId) {
+        this.subject = subject;
+        this.courseNumber = courseNumber;
+        this.title = title;
+        this.courseId = courseId;
+    }
+
+
     public Course(String subject, int courseNumber, String title, double rating) {
         this.subject = subject;
         this.courseNumber = courseNumber;
@@ -49,6 +59,14 @@ public class Course {
 
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
     }
 
     @Override
