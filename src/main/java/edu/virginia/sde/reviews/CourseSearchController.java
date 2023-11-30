@@ -31,6 +31,8 @@ public class CourseSearchController {
     @FXML
     private TextField titleTextField;
 
+    private Course activeCourse;
+
 //    @FXML
 //    private TableColumn<Course, String> subjectColumn;
 //
@@ -51,6 +53,7 @@ public class CourseSearchController {
 
     public void setActiveUser(User activeUser) { this.activeUser = activeUser; }
 
+    public void setActiveCourse(Course activeCourse) { this.activeCourse = activeCourse; }
     public void initialize(){
         try {
             databaseConnection = new DatabaseConnection();

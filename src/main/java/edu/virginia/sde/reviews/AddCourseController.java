@@ -24,16 +24,20 @@ public class AddCourseController{
     @FXML
     private Label courseAddLabel;
 
+    private Course activeCourse;
+
 
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
+
     public void handleBackButton() {
         //scene switch back to course search from My Reviews
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-search.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             var controller = (CourseSearchController) fxmlLoader.getController();
+            controller.setActiveCourse(activeCourse);
             controller.setPrimaryStage(primaryStage);
             primaryStage.setTitle("Course Search");
             primaryStage.setScene(scene);
@@ -60,6 +64,8 @@ public class AddCourseController{
             int course_number = Integer.parseInt(numberString);
             boolean successfulAdd = addCourseService.addIfNotExists(subjectString, course_number, titleString);
             if (successfulAdd) {
+                int courseID = addCourseService.getCourseID(subjectString, numberString, titleString);
+                activeCourse = new Course(subjectString, Integer.parseInt(numberString), titleString, courseID);
                 handleCourseAdded();
             }
             else {

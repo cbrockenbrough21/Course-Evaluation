@@ -20,6 +20,25 @@ public class AddCourseService {
         return !title.isEmpty() && title.length() <= 50;
     }
 
+    public int getCourseID(String subject, String number, String title){
+        int numberInt = Integer.parseInt(number);
+        DatabaseConnection databaseConnection = null;
+        try {
+            databaseConnection = new DatabaseConnection();
+            return databaseConnection.getCourseID(subject, numberInt, title);
+        } catch (SQLException e) {
+            throw new RuntimeException();
+        } finally {
+            try {
+                if (databaseConnection != null) {
+                    databaseConnection.disconnect();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException();
+            }
+        }
+    }
+
     public boolean addIfNotExists(String subject, int course_number, String title) {
         DatabaseConnection databaseConnection = null;
         try {
