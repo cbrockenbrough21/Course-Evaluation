@@ -13,8 +13,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class CourseReviewsController {
-
-    private DatabaseConnection databaseConnection;
     @FXML
     public Label activeCourseLabel;
 
@@ -36,26 +34,19 @@ public class CourseReviewsController {
     }
 
     public void initialize(){
-        try {
-            databaseConnection = new DatabaseConnection();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        //updateTable();
+        var courseReviewsService = new CourseReviewsService();
+        courseReviewsService.initialize();
     }
 
     public void updateTable(){
-        List<Review> reviewList = null;
-        int courseId = activeCourse.getCourseId();
-        try {
-            reviewList = databaseConnection.getReviews(courseId);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        var courseReviewsService = new CourseReviewsService();
+        List<Review> reviewList = courseReviewsService.getReviewList(activeCourse);
+
         ObservableList<Review> obsList = FXCollections.observableList(reviewList);
         tableView.getItems().clear();
         tableView.getItems().addAll(obsList);
     }
+
     public void setActiveCourseLabel(){
         activeCourseLabel.setStyle("-fx-text-fill: navy;");
         activeCourseLabel.setText(activeCourse.toString());
