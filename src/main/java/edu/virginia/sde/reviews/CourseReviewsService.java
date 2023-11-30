@@ -29,4 +29,41 @@ public class CourseReviewsService {
         }
     }
 
+    public void addReview(String choice, String comment){
+        int rating = getRating(choice);
+        DatabaseConnection databaseConnection = null;
+        try {
+            databaseConnection = new DatabaseConnection();
+            databaseConnection.addReview();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public int getRating(String choice){
+        int rating = -1;
+        switch(choice){
+            case "1": {
+                rating = 1;
+                break;
+            }
+            case "2": {
+                rating = 2;
+                break;
+            }
+            case "3": {
+                rating = 3;
+                break;
+            }
+            case "4": {
+                rating = 4;
+                break;
+            }
+            case "5": {
+                rating = 5;
+                break;
+            }
+        }
+        return rating;
+    }
+
 }

@@ -6,20 +6,33 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.virginia.sde.reviews.CourseReviewsController">
    <children>
-      <Button layoutX="20.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleBackButton" text="Return to Course Search" />
-       <Label fx:id = "activeCourseLabel" layoutX="20.0" layoutY="68.0" text="Course" />
-      <TableView fx:id="tableView" layoutX="20.0" layoutY="114.0" prefHeight="258.0" prefWidth="545.0">
-        <columns>
-            <TableColumn prefWidth="103.0" text="Course Rating">
-                <cellValueFactory><PropertyValueFactory property="rating" />
-                </cellValueFactory></TableColumn>
-            <TableColumn prefWidth="136.0" text="Course Timestamp">
-                <cellValueFactory><PropertyValueFactory property="timestamp" />
-                </cellValueFactory></TableColumn>
-            <TableColumn prefWidth="237.0" text="Comment">
-                <cellValueFactory><PropertyValueFactory property="comment" />
-                </cellValueFactory></TableColumn>
-        </columns>
-      </TableView>
+      <VBox prefHeight="400.0" prefWidth="600.0">
+         <children>
+             <Button layoutX="20.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleBackButton" text="Return to Course Search" />
+             <Label fx:id="activeCourseLabel" layoutX="20.0" layoutY="68.0" text="Course" />
+             <TableView fx:id="tableView" layoutX="20.0" layoutY="114.0" prefHeight="258.0" prefWidth="545.0">
+                 <columns>
+                     <TableColumn prefWidth="103.0" text="Course Rating">
+                         <cellValueFactory><PropertyValueFactory property="rating" />
+                         </cellValueFactory></TableColumn>
+                     <TableColumn prefWidth="136.0" text="Course Timestamp">
+                         <cellValueFactory><PropertyValueFactory property="timestamp" />
+                         </cellValueFactory></TableColumn>
+                     <TableColumn prefWidth="237.0" text="Comment">
+                         <cellValueFactory><PropertyValueFactory property="comment" />
+                         </cellValueFactory></TableColumn>
+                 </columns>
+             </TableView>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                   <RadioButton fx:id = "rating1" mnemonicParsing="false" text="1"/>
+                   <RadioButton fx:id = "rating2" mnemonicParsing="false" text="2" />
+                   <RadioButton fx:id = "rating3" mnemonicParsing="false" text="3" />
+                   <RadioButton fx:id = "rating4" mnemonicParsing="false" text="4" />
+                   <RadioButton fx:id = "rating5" mnemonicParsing="false" text="5" />
+                  <TextField fx:id = "comment" prefHeight="97.0" prefWidth="166.0" />
+                  <Button mnemonicParsing="false" text="Submit" onAction="#handleSubmitReviewButton"/>
+               </children></HBox>
+         </children></VBox>
    </children>
 </AnchorPane>
