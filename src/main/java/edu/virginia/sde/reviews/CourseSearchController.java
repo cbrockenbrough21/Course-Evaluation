@@ -69,14 +69,8 @@ public class CourseSearchController {
             controller.setPrimaryStage(primaryStage);
             primaryStage.setTitle("Course Review");
             primaryStage.setScene(scene);
-            System.out.println("Clicked on row for: " + selectedCourse.toString());
-            System.out.println("Active Course in CourseReviewsController (before initialize): " + controller.getActiveCourse());
             controller.setActiveCourseLabel();
             primaryStage.show();
-
-            // Debugging statement after the initialize method is called
-            System.out.println("Active Course in CourseReviewsController (after initialize): " + controller.getActiveCourse());
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
