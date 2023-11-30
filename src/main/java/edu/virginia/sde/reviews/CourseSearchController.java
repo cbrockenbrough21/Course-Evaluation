@@ -3,18 +3,10 @@ package edu.virginia.sde.reviews;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.TableView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -47,23 +39,15 @@ public class CourseSearchController {
     public void setActiveUser(User activeUser) { this.activeUser = activeUser; }
 
     public void initialize(){
-        tableView.setRowFactory(new Callback<TableView<Course>, TableRow<Course>>() {
-//            subjectColumn.setCellValueFactory(new PropertyValueFactory<>("subject"));
-//            numberColumn.setCellValueFactory(new PropertyValueFactory<>("courseNumber"));
-//            titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-//            ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
-            @Override
-            public TableRow<Course> call(TableView<Course> tableView) {
-                final TableRow<Course> row = new TableRow<>();
-                row.setOnMouseClicked(event -> {
-                    if (!row.isEmpty() && event.getClickCount() == 1) {
-                        Course rowData = row.getItem();
-                        // Handle the row click event here
-                        handleRowClick(rowData);
-                    }
-                });
-                return row;
-            }
+        tableView.setRowFactory(tableView -> {
+            TableRow<Course> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (!row.isEmpty() && event.getClickCount() == 1) {
+                    Course rowData = row.getItem();
+                    handleRowClick(rowData);
+                }
+            });
+            return row;
         });
         updateTable();
     }
@@ -85,7 +69,7 @@ public class CourseSearchController {
 
     public void handleSearchButton(){
         //logic for search for anything in all three of the fields
-        //updateTable();
+        updateTable();
     }
 
     public void handleLogOutButton(){
