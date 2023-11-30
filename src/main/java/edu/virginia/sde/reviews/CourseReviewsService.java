@@ -62,7 +62,7 @@ public class CourseReviewsService {
                 break;
             }
         }
-        return rating
+        return rating;
     }
 
 }
