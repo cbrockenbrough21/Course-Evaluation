@@ -210,6 +210,27 @@ public class DatabaseConnection {
         }
     }
 
+    public List<Review> getReviews(Course course) throws SQLException {
+        List<Review> courseReviews = new ArrayList<>();
+        try{
+            var statement = connection.prepareStatement(
+                    """
+                            SELECT * FROM Review WHERE Review.COURSEID=course.getId()
+                            """);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()){
+//                String subject = rs.getString("subject");
+//                int number = rs.getInt("number");
+//                String title = rs.getString("title");
+//                courseReviews.add(new Review());
+            }
+            return courseReviews;
+        } catch(SQLException e){
+            connection.rollback();
+            throw(e);
+        }
+    }
+
     public void disconnect() throws SQLException {
         connection.close();
     }

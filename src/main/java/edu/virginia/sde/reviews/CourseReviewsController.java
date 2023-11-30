@@ -1,5 +1,7 @@
 package edu.virginia.sde.reviews;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -7,10 +9,17 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 public class CourseReviewsController {
+
+    private DatabaseConnection databaseConnection;
     @FXML
     public Label activeCourseLabel;
+
+    @FXML
+    private TableView<Review> tableView;
 
     private User activeUser;
 
@@ -26,6 +35,26 @@ public class CourseReviewsController {
         this.primaryStage = primaryStage;
     }
 
+    public void initialize(){
+        try {
+            databaseConnection = new DatabaseConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        updateTable();
+    }
+
+    public void updateTable(){
+        List<Review> reviewList = null;
+        try {
+            reviewList = databaseConnection.getReviews(activeCourse);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        ObservableList<Review> obsList = FXCollections.observableList(reviewList);
+        tableView.getItems().clear();
+        tableView.getItems().addAll(obsList);
+    }
     public void setActiveCourseLabel(){
         activeCourseLabel.setStyle("-fx-text-fill: navy;");
         activeCourseLabel.setText(activeCourse.toString());
