@@ -32,7 +32,6 @@ public class LoginService {
                 return false;
             }
             else if(databasePassword.equals(password)){
-                //System.out.println("got to this line");
                 return true;
             }
             return false;

@@ -77,7 +77,6 @@ public class DatabaseConnection {
     }
 
     public void addUser(String username, String password) throws SQLException{
-        System.out.println("got to this line");
         try{
             var addStatement = connection.prepareStatement(
                     """

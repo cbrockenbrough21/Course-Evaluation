@@ -38,14 +38,12 @@ public class CreateUserController {
         }
 
         boolean successfulAdd = loginService.addIfNotExists(enteredUsername, enteredPassword);
-        System.out.println("got to this line");
 
         if(successfulAdd){
             handleAccountCreated();
             return;
         }
         else{
-            System.out.println("got to this line");
             handleUserExistsError();
             return;
         }
@@ -63,6 +61,7 @@ public class CreateUserController {
     }
 
     public void handleAccountCreated(){
+        createAccountLabel.setStyle("-fx-text-fill: black;");
         createAccountLabel.setText("Account successfully created! Please go back to login.");
     }
 
