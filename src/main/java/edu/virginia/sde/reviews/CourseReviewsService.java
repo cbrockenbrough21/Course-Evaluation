@@ -1,6 +1,7 @@
 package edu.virginia.sde.reviews;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.*;
 
 public class CourseReviewsService {
@@ -29,11 +30,12 @@ public class CourseReviewsService {
         }
     }
 
-    public void addReview(String choice, String comment){
+    public void addReview(int userId, int courseId, String choice, String comment){
         int rating = getRating(choice);
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         try {
             DatabaseConnection databaseConnection = new DatabaseConnection();
-            databaseConnection.addReview();
+            databaseConnection.addReview(userId, courseId, rating, comment, timestamp);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -37,6 +37,9 @@ public class CourseReviewsController {
     @FXML
     private TextField comment;
 
+    @FXML
+    private Label submitLabel;
+
     private User activeUser;
 
     private Course activeCourse;
@@ -95,10 +98,17 @@ public class CourseReviewsController {
 
     public void handleSubmitReviewButton(){
         CourseReviewsService courseReviewsService = new CourseReviewsService();
+        System.out.println(activeUser);
         var toggle = (RadioButton) buttonGroup.getSelectedToggle();
-        String choice = toggle.getText();
-        String commentString = comment.getText();
-        courseReviewsService.addReview(choice, commentString);
+        if (toggle == null){
+            submitLabel.setText("Did not choose rating");
+            submitLabel.setVisible(true);
+        }
+        else {
+            String choice = toggle.getText();
+            String commentString = comment.getText();
+            courseReviewsService.addReview(activeUser.getId(), activeCourse.getCourseId(), choice, commentString);
+        }
     }
 
 

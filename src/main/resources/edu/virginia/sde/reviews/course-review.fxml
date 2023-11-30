@@ -32,7 +32,7 @@
                    <RadioButton fx:id = "rating5" mnemonicParsing="false" text="5" />
                   <TextField fx:id = "comment" prefHeight="97.0" prefWidth="166.0" />
                   <Button mnemonicParsing="false" text="Submit" onAction="#handleSubmitReviewButton"/>
-                   <Label visible="false" text="Info about submission"/>
+                   <Label fx:id = "submitLabel" visible="false" text="Info about submission"/>
                </children></HBox>
          </children></VBox>
    </children>

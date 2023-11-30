@@ -65,10 +65,10 @@ public class CourseSearchController {
             Scene scene = new Scene(fxmlLoader.load());
             var controller = (CourseReviewsController) fxmlLoader.getController();
             controller.setActiveCourse(selectedCourse);
-            controller.setActiveUser(activeUser);
             controller.setActiveCourseLabel();
             controller.updateTable();
             controller.setPrimaryStage(primaryStage);
+            controller.setActiveUser(activeUser);
             primaryStage.setTitle("Course Review");
             primaryStage.setScene(scene);
             primaryStage.show();

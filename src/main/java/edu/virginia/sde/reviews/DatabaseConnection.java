@@ -118,8 +118,27 @@ public class DatabaseConnection {
         }
     }
 
-    public void addReview(){
-
+    public void addReview(int userID, int courseID, int rating, String comment, Timestamp timestamp) throws SQLException {
+        try {
+            var statement = connection.prepareStatement(
+                    """
+                            INSERT INTO COURSES(userId, courseId, rating, comment, timestamp)
+                            VALUES(?, ?, ?)
+                        """
+            );
+            statement.setInt(1, userID);
+            statement.setInt(2, courseID);
+            statement.setInt(3, rating);
+            statement.setString(4, comment);
+            statement.setTimestamp(5, timestamp);
+            int rows = statement.executeUpdate();
+            statement.close();
+            connection.commit();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            connection.rollback();
+            throw new SQLIntegrityConstraintViolationException();
+        }
     }
 
     public String getPasswordByUsername(String givenUsername) throws SQLException{
