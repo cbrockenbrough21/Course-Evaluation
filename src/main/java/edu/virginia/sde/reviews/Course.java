@@ -7,8 +7,6 @@ public class Course {
 
     private double rating;
 
-
-
     public Course(String subject, int courseNumber, String title, double rating) {
         this.subject = subject;
         this.courseNumber = courseNumber;
@@ -46,5 +44,10 @@ public class Course {
 
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    @Override
+    public String toString() {
+        return subject + " " + courseNumber + ": " + title;
     }
 }
