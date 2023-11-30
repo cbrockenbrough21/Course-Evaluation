@@ -30,7 +30,7 @@
                    <RadioButton fx:id = "rating3" mnemonicParsing="false" text="3" />
                    <RadioButton fx:id = "rating4" mnemonicParsing="false" text="4" />
                    <RadioButton fx:id = "rating5" mnemonicParsing="false" text="5" />
-                  <TextField prefHeight="97.0" prefWidth="166.0" />
+                  <TextField fx:id = "comment" prefHeight="97.0" prefWidth="166.0" />
                   <Button mnemonicParsing="false" text="Submit" onAction="#handleSubmitReviewButton"/>
                </children></HBox>
          </children></VBox>
