@@ -33,17 +33,6 @@ public class CourseSearchController {
 
     private Course activeCourse;
 
-//    @FXML
-//    private TableColumn<Course, String> subjectColumn;
-//
-//    @FXML
-//    private TableColumn<Course, Integer> numberColumn;
-//
-//    @FXML
-//    private TableColumn<Course, String> titleColumn;
-//
-//    @FXML
-//    private TableColumn<Course, Double> ratingColumn;
     private Stage primaryStage;
     private User activeUser;
 
@@ -80,10 +69,11 @@ public class CourseSearchController {
             var controller = (CourseReviewsController) fxmlLoader.getController();
             controller.setActiveCourse(selectedCourse);
             controller.setActiveUser(activeUser);
+            controller.setActiveCourseLabel();
+            controller.updateTable();
             controller.setPrimaryStage(primaryStage);
             primaryStage.setTitle("Course Review");
             primaryStage.setScene(scene);
-            controller.setActiveCourseLabel();
             primaryStage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);

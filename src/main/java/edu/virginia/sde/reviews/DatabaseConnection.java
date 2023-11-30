@@ -249,13 +249,13 @@ public class DatabaseConnection {
         }
     }
 
-    public List<Review> getReviews(Course course) throws SQLException {
+    public List<Review> getReviews(int courseId) throws SQLException {
         List<Review> courseReviews = new ArrayList<>();
-        int courseId = course.getCourseId();
+        //int courseId = course.getCourseId();
         try{
             var statement = connection.prepareStatement(
                     """
-                            SELECT * FROM Review WHERE Review.COURSEID= ?
+                            SELECT * FROM Reviews WHERE Reviews.COURSEID= ?
                             """);
             statement.setInt(1, courseId);
             ResultSet rs = statement.executeQuery();

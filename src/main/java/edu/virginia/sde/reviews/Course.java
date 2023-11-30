@@ -21,7 +21,6 @@ public class Course {
         this.courseId = courseId;
     }
 
-
     public Course(String subject, int courseNumber, String title, double rating) {
         this.subject = subject;
         this.courseNumber = courseNumber;

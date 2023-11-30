@@ -41,13 +41,14 @@ public class CourseReviewsController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        updateTable();
+        //updateTable();
     }
 
     public void updateTable(){
         List<Review> reviewList = null;
+        int courseId = activeCourse.getCourseId();
         try {
-            reviewList = databaseConnection.getReviews(activeCourse);
+            reviewList = databaseConnection.getReviews(courseId);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

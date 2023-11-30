@@ -9,8 +9,8 @@
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleBackButton" text="Back" />
       <TableView fx:id="tableView" layoutX="14.0" layoutY="63.0" prefHeight="319.0" prefWidth="570.0">
         <columns>
-            <TableColumn prefWidth="156.0" text="Course Mnemonic">
-                <cellValueFactory><PropertyValueFactory property="mnemonic" />
+            <TableColumn prefWidth="156.0" text="Course Subject">
+                <cellValueFactory><PropertyValueFactory property="subject" />
                 </cellValueFactory></TableColumn>
             <TableColumn minWidth="0.0" prefWidth="122.0" text="Course Number">
                 <cellValueFactory><PropertyValueFactory property="courseNumber" />

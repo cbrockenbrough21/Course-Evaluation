@@ -8,7 +8,7 @@
    <children>
       <Button layoutX="20.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleBackButton" text="Return to Course Search" />
        <Label fx:id = "activeCourseLabel" layoutX="20.0" layoutY="68.0" text="Course" />
-      <TableView layoutX="20.0" layoutY="114.0" prefHeight="258.0" prefWidth="545.0">
+      <TableView fx:id="tableView" layoutX="20.0" layoutY="114.0" prefHeight="258.0" prefWidth="545.0">
         <columns>
             <TableColumn prefWidth="103.0" text="Course Rating">
                 <cellValueFactory><PropertyValueFactory property="rating" />
