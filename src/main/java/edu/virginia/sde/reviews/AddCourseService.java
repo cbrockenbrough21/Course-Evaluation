@@ -25,11 +25,13 @@ public class AddCourseService {
         try {
             databaseConnection = new DatabaseConnection();
             List<Course> allCourses = databaseConnection.getAllCourses();
-            if (!isCourseInDatabase(allCourses, subject, course_number, title)) {
+            if (isCourseInDatabase(allCourses, subject, course_number, title)) {
+                return false;
+            }
+            else {
                 databaseConnection.addCourse(subject, course_number, title);
                 return true;
             }
-                return false;
 
         } catch (SQLException e) {
             throw new RuntimeException();
@@ -46,7 +48,7 @@ public class AddCourseService {
 
     public boolean isCourseInDatabase(List<Course> allCourses, String subject, int course_number, String title) {
         for (Course course : allCourses) {
-            if (!(course.getSubject().equals(subject) && !(course.getTitle().equals(title)))) {
+            if ((course.getCourseNumber() == course_number) && (course.getTitle().equals(title))) {
                 return true;
             }
         }
