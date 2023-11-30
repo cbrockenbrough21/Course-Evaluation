@@ -1,16 +1,14 @@
 package edu.virginia.sde.reviews;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Hyperlink;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,6 +17,18 @@ import java.util.List;
 public class CourseSearchController {
     @FXML
     private TableView<Course> tableView;
+
+//    @FXML
+//    private TableColumn<Course, String> subjectColumn;
+//
+//    @FXML
+//    private TableColumn<Course, Integer> numberColumn;
+//
+//    @FXML
+//    private TableColumn<Course, String> titleColumn;
+//
+//    @FXML
+//    private TableColumn<Course, Double> ratingColumn;
     private Stage primaryStage;
     private User activeUser;
 
@@ -29,11 +39,45 @@ public class CourseSearchController {
     public void setActiveUser(User activeUser) { this.activeUser = activeUser; }
 
     public void initialize(){
+        tableView.setRowFactory(tableView -> {
+            TableRow<Course> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (!row.isEmpty() && event.getClickCount() == 1) {
+                    Course rowData = row.getItem();
+                    handleRowClick(rowData);
+                }
+            });
+            return row;
+        });
         updateTable();
     }
+
+    private void handleRowClick(Course selectedCourse){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-review.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            var controller = (CourseReviewsController) fxmlLoader.getController();
+            controller.setActiveCourse(selectedCourse);
+            controller.setActiveUser(activeUser);
+            controller.setPrimaryStage(primaryStage);
+            primaryStage.setTitle("Course Review");
+            primaryStage.setScene(scene);
+            System.out.println("Clicked on row for: " + selectedCourse.toString());
+            System.out.println("Active Course in CourseReviewsController (before initialize): " + controller.getActiveCourse());
+            controller.setActiveCourseLabel();
+            primaryStage.show();
+
+            // Debugging statement after the initialize method is called
+            System.out.println("Active Course in CourseReviewsController (after initialize): " + controller.getActiveCourse());
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void handleSearchButton(){
         //logic for search for anything in all three of the fields
-        //updateTable();
+        updateTable();
     }
 
     public void handleLogOutButton(){
@@ -81,23 +125,9 @@ public class CourseSearchController {
         }
     }
 
-    public void handleCourseClicked() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-review.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            var controller = (CourseReviewsController) fxmlLoader.getController();
-            controller.setPrimaryStage(primaryStage);
-            primaryStage.setTitle("Course Reviews");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     private void updateTable(){
         List<Course> courseList = new ArrayList<>();
-        Course myCourse = new Course("CS", 2100, "DSA1");
+        Course myCourse = new Course("CS", 2100, "DSA1", 2.1);
         courseList.add(myCourse);
 
         ObservableList<Course> obsList = FXCollections.observableList(courseList);

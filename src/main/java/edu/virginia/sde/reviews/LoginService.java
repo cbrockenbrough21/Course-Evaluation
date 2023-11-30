@@ -32,7 +32,6 @@ public class LoginService {
                 return false;
             }
             else if(databasePassword.equals(password)){
-                //System.out.println("got to this line");
                 return true;
             }
             return false;
@@ -53,7 +52,6 @@ public class LoginService {
         //return true if successful add, return false if username was already in database
     public boolean addIfNotExists(String username, String password){
         DatabaseConnection databaseConnection = null;
-
         try{
             databaseConnection = new DatabaseConnection();
             try{

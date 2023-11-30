@@ -5,10 +5,13 @@ public class Course {
     private int courseNumber;
     private String title;
 
-    public Course(String subject, int courseNumber, String title) {
+    private double rating;
+
+    public Course(String subject, int courseNumber, String title, double rating) {
         this.subject = subject;
         this.courseNumber = courseNumber;
         this.title = title;
+        this.rating = rating;
     }
 
     public String getSubject() {
@@ -33,5 +36,18 @@ public class Course {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    @Override
+    public String toString() {
+        return subject + " " + courseNumber + ": " + title;
     }
 }
