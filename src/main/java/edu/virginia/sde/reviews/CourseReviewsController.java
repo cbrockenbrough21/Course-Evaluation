@@ -9,26 +9,26 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class CourseReviewsController {
-
     @FXML
-    public Label courses_reviews;
+    public Label activeCourseLabel;
 
     private User activeUser;
 
     private Course activeCourse;
 
     private Stage primaryStage;
+
     public void setActiveUser(User activeUser) { this.activeUser = activeUser; }
+
     public void setActiveCourse(Course activeCourse){this.activeCourse = activeCourse;}
 
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
 
-    public void getCourseNameOfReviews() {
-        courses_reviews.setStyle("-fx-text-fill: navy;");
-        //store a course before scene switching
-        //courses_reviews.setText("");
+    public void setActiveCourseLabel(){
+        activeCourseLabel.setStyle("-fx-text-fill: navy;");
+        activeCourseLabel.setText(activeCourse.toString());
     }
 
     public void handleBackButton(){
@@ -44,5 +44,9 @@ public class CourseReviewsController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public Course getActiveCourse(){
+        return activeCourse;
     }
 }
