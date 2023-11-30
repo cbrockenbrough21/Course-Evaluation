@@ -7,8 +7,6 @@ public class Course {
 
     private double rating;
 
-
-
     public Course(String subject, int courseNumber, String title, double rating) {
         this.subject = subject;
         this.courseNumber = courseNumber;
