@@ -3,26 +3,20 @@ package edu.virginia.sde.reviews;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.TableView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CourseSearchController {
+    DatabaseConnection databaseConnection;
     @FXML
     private TableView<Course> tableView;
 
@@ -47,23 +41,20 @@ public class CourseSearchController {
     public void setActiveUser(User activeUser) { this.activeUser = activeUser; }
 
     public void initialize(){
-        tableView.setRowFactory(new Callback<TableView<Course>, TableRow<Course>>() {
-//            subjectColumn.setCellValueFactory(new PropertyValueFactory<>("subject"));
-//            numberColumn.setCellValueFactory(new PropertyValueFactory<>("courseNumber"));
-//            titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-//            ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
-            @Override
-            public TableRow<Course> call(TableView<Course> tableView) {
-                final TableRow<Course> row = new TableRow<>();
-                row.setOnMouseClicked(event -> {
-                    if (!row.isEmpty() && event.getClickCount() == 1) {
-                        Course rowData = row.getItem();
-                        // Handle the row click event here
-                        handleRowClick(rowData);
-                    }
-                });
-                return row;
-            }
+        try {
+            databaseConnection = new DatabaseConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        tableView.setRowFactory(tableView -> {
+            TableRow<Course> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (!row.isEmpty() && event.getClickCount() == 1) {
+                    Course rowData = row.getItem();
+                    handleRowClick(rowData);
+                }
+            });
+            return row;
         });
         updateTable();
     }
@@ -73,19 +64,21 @@ public class CourseSearchController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-review.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             var controller = (CourseReviewsController) fxmlLoader.getController();
+            controller.setActiveCourse(selectedCourse);
+            controller.setActiveUser(activeUser);
             controller.setPrimaryStage(primaryStage);
             primaryStage.setTitle("Course Review");
             primaryStage.setScene(scene);
+            controller.setActiveCourseLabel();
             primaryStage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Clicked on row with title: " + selectedCourse.getTitle());
     }
 
     public void handleSearchButton(){
         //logic for search for anything in all three of the fields
-        //updateTable();
+        updateTable();
     }
 
     public void handleLogOutButton(){
@@ -134,10 +127,12 @@ public class CourseSearchController {
     }
 
     private void updateTable(){
-        List<Course> courseList = new ArrayList<>();
-        Course myCourse = new Course("CS", 2100, "DSA1", 2.1);
-        courseList.add(myCourse);
-
+        List<Course> courseList = null;
+        try {
+            courseList = databaseConnection.getAllCourses();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         ObservableList<Course> obsList = FXCollections.observableList(courseList);
         tableView.getItems().clear();
         tableView.getItems().addAll(obsList);

@@ -44,24 +44,31 @@ public class AddCourseController{
     }
 
     public void handleAddCourse(){
-        //say course successfully added
+        var addCourseService = new AddCourseService();
         String subjectString = subject.getText();
         String numberString = courseNumber.getText();
         String titleString = title.getText();
 
-        boolean successful = true;
-        //addCoursetoDatabase(subject, courseNumber, title);
-
-        if (successful){
-            subject.clear();
-            courseNumber.clear();
-            title.clear();
-            courseAddLabel.setText("Successfully added course!");
-            courseAddLabel.setVisible(true);
+        boolean validCourse = addCourseService.isValidSubject(subjectString) &&
+                              addCourseService.isValidCourseNumber(numberString) &&
+                              addCourseService.isValidTitle(titleString);
+        if (validCourse) {
+            int course_number = Integer.parseInt(numberString);
+            boolean successfulAdd = addCourseService.addIfNotExists(subjectString, course_number, titleString);
+            if (successfulAdd) {
+                handleCourseAdded();
+            }
         }
         else {
             courseAddLabel.setText("Unable to add the course because invalid input. Please try again. ");
             courseAddLabel.setVisible(true);
         }
+    }
+    public void handleCourseAdded() {
+        subject.clear();
+        courseNumber.clear();
+        title.clear();
+        courseAddLabel.setText("Successfully added course!");
+        courseAddLabel.setVisible(true);
     }
 }
