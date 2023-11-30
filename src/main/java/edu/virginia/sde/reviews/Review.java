@@ -1,10 +1,8 @@
 package edu.virginia.sde.reviews;
 
 
-import java.sql.Timestamp;
-
 public class Review {
-    private String mnemonic;
+    private String subject;
     private int courseNumber;
     private String title;
 
@@ -12,16 +10,16 @@ public class Review {
     private String timestamp;
 
     //Constructor for my review screen, can add another if class is used for writing reviews
-    public Review (String mnemonic, int courseNumber, double rating, String timestamp) {
-        this.mnemonic = mnemonic;
+    public Review (String subject, int courseNumber, double rating, String timestamp) {
+        this.subject = subject;
         this.courseNumber = courseNumber;
         this.rating = rating;
         this.timestamp = timestamp;
     }
 
-    public String getMnemonic() {return mnemonic; }
+    public String getSubject() {return subject; }
 
-    public void setMnemonic(String mnemonic) {this.mnemonic = mnemonic; }
+    public void setSubject(String subject) {this.subject = subject; }
 
     public int getCourseNumber() {return courseNumber; }
 
