@@ -25,4 +25,22 @@ public class CourseSearchService {
             }
         }
     }
+
+    public List<Course> getCourses(){
+        DatabaseConnection databaseConnection = null;
+        try{
+            databaseConnection = new DatabaseConnection();
+            return databaseConnection.getAllCourses();
+        } catch(SQLException e){
+            throw new RuntimeException();
+        } finally {
+            try {
+                if (databaseConnection != null) {
+                    databaseConnection.disconnect();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 }

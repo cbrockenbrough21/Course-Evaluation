@@ -221,7 +221,7 @@ public class DatabaseConnection {
                 int retrievedNumber = rs.getInt("Number");
                 String retrievedTitle = rs.getString("Title");
 
-                Course course = new Course(retrievedSubject, retrievedNumber, retrievedTitle);
+                Course course = new Course(retrievedSubject, retrievedNumber, retrievedTitle, 1);
                 courses.add(course);
             }
 
@@ -241,10 +241,11 @@ public class DatabaseConnection {
                             """);
             ResultSet rs = statement.executeQuery();
             while(rs.next()){
-                String subject = rs.getString("subject");
-                int number = rs.getInt("number");
-                String title = rs.getString("title");
-                allCourses.add(new Course(subject, number, title));
+                String subject = rs.getString("Subject");
+                int number = rs.getInt("Number");
+                String title = rs.getString("Title");
+                int courseID = rs.getInt("CourseID");
+                allCourses.add(new Course(subject, number, title, courseID));
             }
             return allCourses;
         } catch(SQLException e){
@@ -253,21 +254,23 @@ public class DatabaseConnection {
         }
     }
 
-    public List<Review> getReviews(int courseId) throws SQLException {
-        List<Review> courseReviews = new ArrayList<>();
-        //int courseId = course.getCourseId();
+    public List<Review> getReviewsByCourseID(int courseId) throws SQLException {
         try{
             var statement = connection.prepareStatement(
                     """
-                            SELECT * FROM Reviews WHERE Reviews.COURSEID= ?
+                            SELECT * FROM Reviews WHERE CourseID = ?
                             """);
             statement.setInt(1, courseId);
             ResultSet rs = statement.executeQuery();
+            List<Review> courseReviews = new ArrayList<>();
             while(rs.next()){
-                String subject = rs.getString("subject");
-                int number = rs.getInt("number");
-                String title = rs.getString("title");
-                //courseReviews.add(new Review());
+                int reviewID = rs.getInt("ReviewID");
+                int userID = rs.getInt("UserID");
+                int courseID = rs.getInt("CourseID");
+                int rating = rs.getInt("Rating");
+                String comment = rs.getString("Comment");
+                Timestamp timestamp = rs.getTimestamp("Timestamp");
+                courseReviews.add(new Review(reviewID, userID, courseID, rating, comment)); //fix this to make timestamp work
             }
             return courseReviews;
         } catch(SQLException e){

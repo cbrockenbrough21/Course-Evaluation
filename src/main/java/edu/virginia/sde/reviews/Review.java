@@ -1,34 +1,77 @@
 package edu.virginia.sde.reviews;
 
-
 public class Review {
-    private String subject;
-    private int courseNumber;
-    private String title;
-
-    private double rating;
+    private int reviewID;
+    private int userID;
+    private int courseID;
+    private int rating;
+    private String comment;
     private String timestamp;
 
     //Constructor for my review screen, can add another if class is used for writing reviews
-    public Review (String subject, int courseNumber, double rating, String timestamp) {
-        this.subject = subject;
-        this.courseNumber = courseNumber;
+    public Review (int reviewID, int userID, int courseID, int rating, String comment) {
+        this.reviewID = reviewID;
+        this.userID = userID;
+        this.courseID = courseID;
         this.rating = rating;
+        this.comment = comment;
+        this.timestamp = null;
+    }
+
+    public Review (int reviewID, int userID, int courseID, int rating, String comment, String timestamp) {
+        this.reviewID = reviewID;
+        this.userID = userID;
+        this.courseID = courseID;
+        this.rating = rating;
+        this.comment = comment;
         this.timestamp = timestamp;
     }
 
-    public String getSubject() {return subject; }
+    public int getReviewID() {
+        return reviewID;
+    }
 
-    public void setSubject(String subject) {this.subject = subject; }
+    public void setReviewID(int reviewID) {
+        this.reviewID = reviewID;
+    }
 
-    public int getCourseNumber() {return courseNumber; }
+    public int getUserID() {
+        return userID;
+    }
 
-    public void setCourseNumber(int courseNumber) {this.courseNumber = courseNumber; }
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
 
-    public double getRating() {return rating; }
+    public int getCourseID() {
+        return courseID;
+    }
 
-    public void setRating(double rating) {this.rating = rating; }
+    public void setCourseID(int courseID) {
+        this.courseID = courseID;
+    }
 
-    //public Timestamp getTimeStamp() {return timestamp;}
+    public int getRating() {
+        return rating;
+    }
 
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
 }

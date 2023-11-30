@@ -53,7 +53,7 @@ public class MyReviewsController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Clicked on row with title: " + selectedReview.getSubject());
+        //System.out.println("Clicked on row with title: " + selectedReview.getSubject());
     }
     public void handleBackButton() {
         //scene switch back to course search from My Reviews
@@ -78,9 +78,9 @@ public class MyReviewsController {
 
 
         List<Review> myReviewList = new ArrayList<>();
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        Review myReview = new Review("CS", 2100, 3.0, timestamp.toString());
-        myReviewList.add(myReview);
+//        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+//        Review myReview = new Review("CS", 2100, 3.0, timestamp.toString());
+//        myReviewList.add(myReview);
         ObservableList<Review> obsList = FXCollections.observableList(myReviewList);
         tableView.getItems().clear();
         tableView.getItems().addAll(obsList);

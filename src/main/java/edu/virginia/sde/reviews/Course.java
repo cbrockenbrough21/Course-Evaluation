@@ -9,11 +9,6 @@ public class Course {
 
     private int courseId;
 
-    public Course(String subject, int courseNumber, String title) {
-        this.subject = subject;
-        this.courseNumber = courseNumber;
-        this.title = title;
-    }
     public Course(String subject, int courseNumber, String title, int courseId) {
         this.subject = subject;
         this.courseNumber = courseNumber;
