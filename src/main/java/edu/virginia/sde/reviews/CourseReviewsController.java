@@ -81,6 +81,10 @@ public class CourseReviewsController {
         activeCourseLabel.setText(activeCourse.toString());
     }
 
+    public void printActiveUserId(){
+        System.out.println(activeUser.getUsername());
+    }
+
     public void handleBackButton(){
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-search.fxml"));
@@ -98,7 +102,10 @@ public class CourseReviewsController {
 
     public void handleSubmitReviewButton(){
         CourseReviewsService courseReviewsService = new CourseReviewsService();
-        System.out.println(activeUser);
+        int courseId = activeCourse.getCourseId();
+        int userId = activeUser.getId();
+        System.out.println(courseId);
+        System.out.println(userId);
         var toggle = (RadioButton) buttonGroup.getSelectedToggle();
         if (toggle == null){
             submitLabel.setText("Did not choose rating");

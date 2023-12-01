@@ -41,9 +41,6 @@ public class LoginController {
         String enteredUsername = username.getText();
         String enteredPassword = password.getText();
 
-        //System.out.println(enteredUsername);
-        //System.out.println(enteredPassword);
-
         if(enteredPassword.equals("") || enteredUsername.equals("")){
             handleLoginError();
             return;
@@ -57,7 +54,7 @@ public class LoginController {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-search.fxml"));
                     Scene scene = new Scene(fxmlLoader.load());
                     var controller = (CourseSearchController) fxmlLoader.getController();
-                    controller.setActiveUser(activeUser);
+                    controller.setActiveUser(new User(enteredUsername, enteredPassword, 1));
                     controller.setPrimaryStage(primaryStage);
                     primaryStage.setTitle("Course Search");
                     primaryStage.setScene(scene);
