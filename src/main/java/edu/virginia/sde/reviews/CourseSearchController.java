@@ -13,9 +13,12 @@ import javafx.util.Callback;
 import java.lang.reflect.InvocationTargetException;
 
 import java.io.IOException;
+import java.math.RoundingMode;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import java.math.BigDecimal;
 
 public class CourseSearchController {
     DatabaseConnection databaseConnection;
@@ -145,7 +148,19 @@ public class CourseSearchController {
 
     private void updateTable(){
         var courseSearchService = new CourseSearchService();
+        var courseReviewService = new CourseReviewsService();
         List<Course> courseList = courseSearchService.getCourses();
+        for (Course course : courseList) {
+            double cum_rating = 0.0;
+            int rev_count = 0;
+            List<Review> courseReviews = courseReviewService.getReviewList(course);
+            for (Review review : courseReviews) {
+                rev_count++;
+                cum_rating = cum_rating + review.getRating();
+            }
+            double avg = (cum_rating / rev_count);
+            course.setRating(avg);
+        }
         ObservableList<Course> obsList = FXCollections.observableList(courseList);
         tableView.getItems().clear();
         tableView.getItems().addAll(obsList);
