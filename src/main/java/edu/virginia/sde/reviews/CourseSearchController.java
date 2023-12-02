@@ -157,7 +157,10 @@ public class CourseSearchController {
                 cum_rating = cum_rating + review.getRating();
             }
             String avg = String.format("%.2f", (cum_rating / rev_count));
-            course.setRating(Double.parseDouble(avg));
+            if (courseReviews.isEmpty()) {
+                avg = "";
+            }
+            course.setRating(avg);
         }
         ObservableList<Course> obsList = FXCollections.observableList(courseList);
         tableView.getItems().clear();
