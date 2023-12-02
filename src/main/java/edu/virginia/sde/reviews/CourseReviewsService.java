@@ -87,6 +87,24 @@ public class CourseReviewsService {
             }
         }
     }
+
+    public void deleteReview(int reviewId){
+        DatabaseConnection databaseConnection = null;
+        try {
+            databaseConnection = new DatabaseConnection();
+            databaseConnection.deleteReview(reviewId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (databaseConnection != null) {
+                    databaseConnection.disconnect();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException();
+            }
+        }
+    }
     public int getRating(String choice){
         int rating = -1;
         switch(choice){

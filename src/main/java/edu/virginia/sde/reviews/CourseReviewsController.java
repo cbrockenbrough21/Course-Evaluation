@@ -43,6 +43,9 @@ public class CourseReviewsController {
     @FXML
     private Button submitButton;
 
+    @FXML
+    private Button deleteButton;
+
     private User activeUser;
 
     private Course activeCourse;
@@ -112,6 +115,11 @@ public class CourseReviewsController {
                 }
             }
         }
+        else {
+            submitButton.setText("Submit");
+            comment.setText("");
+            buttonGroup.selectToggle(null);
+        }
     }
 
 
@@ -132,8 +140,6 @@ public class CourseReviewsController {
 
     public void handleSubmitReviewButton(){
         CourseReviewsService courseReviewsService = new CourseReviewsService();
-        int courseId = activeCourse.getCourseId();
-        int userId = activeUser.getId();
         var toggle = (RadioButton) buttonGroup.getSelectedToggle();
         if (toggle == null){
             submitLabel.setText("Did not choose rating");
@@ -146,19 +152,30 @@ public class CourseReviewsController {
                 courseReviewsService.addReview(activeUser.getId(), activeCourse.getCourseId(), choice, commentString);
                 submitLabel.setText("Successfully submitted review!");
                 submitLabel.setVisible(true);
+                submitButton.setText("Resubmit");
+                activeReview = courseReviewsService.getUserReview(activeUser.getId(), activeCourse.getCourseId());
             }
             else {
                 courseReviewsService.updateReview(activeReview.getReviewID(), choice, commentString);
                 submitLabel.setText("Successfully updated review!");
                 submitLabel.setVisible(true);
             }
+            deleteButton.setVisible(true);
             updateTable();
 
         }
     }
 
     public void handleDeleteReviewButton(){
-        submitLabel.setText("Haven't done this button yet");
-        submitLabel.setVisible(true);
+        if (activeReview != null){
+            CourseReviewsService courseReviewsService = new CourseReviewsService();
+            courseReviewsService.deleteReview(activeReview.getReviewID());
+            activeReview = null;
+            updateTable();
+            setUserReview();
+            submitLabel.setText("Successfully deleted review!");
+            submitLabel.setVisible(true);
+            deleteButton.setVisible(false);
+        }
     }
 }

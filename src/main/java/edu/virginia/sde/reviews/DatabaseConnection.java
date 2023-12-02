@@ -164,6 +164,24 @@ public class DatabaseConnection {
         }
     }
 
+    public void deleteReview(int reviewID) throws SQLException {
+        try {
+            var statement = connection.prepareStatement(
+                    "DELETE FROM REVIEWS WHERE reviewID = ?"
+            );
+            statement.setInt(1, reviewID);
+
+            int rows = statement.executeUpdate();
+
+            statement.close();
+            connection.commit();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            connection.rollback();
+            throw new SQLIntegrityConstraintViolationException();
+        }
+    }
+
     public String getPasswordByUsername(String givenUsername) throws SQLException{
         try{
             var statement = connection.prepareStatement(
