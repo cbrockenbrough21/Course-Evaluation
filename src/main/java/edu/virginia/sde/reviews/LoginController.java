@@ -93,4 +93,8 @@ public class LoginController {
         }
     }
 
+    public void handleCloseButton() {
+        System.exit(0);
+    }
+
 }
