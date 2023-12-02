@@ -73,7 +73,7 @@ public class MyReviewsController {
 
     public String getActiveUsername(User activeUser) {return activeUser.getUsername(); }
 
-    private void updateTable() {
+    public void updateTable() {
         //eventually this will be querying a database but for now hard-coded
 
 

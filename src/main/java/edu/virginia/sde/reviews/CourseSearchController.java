@@ -144,7 +144,7 @@ public class CourseSearchController {
         }
     }
 
-    private void updateTable(){
+    public void updateTable(){
         var courseSearchService = new CourseSearchService();
         var courseReviewService = new CourseReviewsService();
         List<Course> courseList = courseSearchService.getCourses();
