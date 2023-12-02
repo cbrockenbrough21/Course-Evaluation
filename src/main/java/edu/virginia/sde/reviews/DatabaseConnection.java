@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Timestamp;
+
 
 public class DatabaseConnection {
     public static final String DATABASE_CONNECTION = "jdbc:sqlite:course_reviews.sqlite";
@@ -329,8 +331,8 @@ public class DatabaseConnection {
                 int courseID = rs.getInt("CourseID");
                 int rating = rs.getInt("Rating");
                 String comment = rs.getString("Comment");
-                //Timestamp timestamp = rs.getTimestamp("Timestamp");
-                courseReviews.add(new Review(reviewID, userID, courseID, rating, comment)); //fix this to make timestamp work
+                Timestamp timestamp = rs.getTimestamp("Timestamp");
+                courseReviews.add(new Review(reviewID, userID, courseID, rating, comment, timestamp)); //fix this to make timestamp work
             }
             return courseReviews;
         } catch(SQLException e){
@@ -354,7 +356,8 @@ public class DatabaseConnection {
                 int courseID = rs.getInt("CourseID");
                 int rating = rs.getInt("Rating");
                 String comment = rs.getString("Comment");
-                return new Review(reviewID, userID, courseID, rating, comment);
+                Timestamp timestamp = rs.getTimestamp("Timestamp");
+                return new Review(reviewID, userID, courseID, rating, comment, timestamp);
             }
             else return null;
         } catch(SQLException e){
