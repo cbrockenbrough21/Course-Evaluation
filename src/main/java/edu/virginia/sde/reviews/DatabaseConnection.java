@@ -228,7 +228,7 @@ public class DatabaseConnection {
         StringBuilder sql = new StringBuilder("SELECT * FROM Courses WHERE 1=1");
 
         if (subject != null && !subject.isEmpty()) {
-            sql.append(" AND Subject = ?");
+            sql.append(" AND LOWER(Subject) = LOWER(?)");
         }
 
         if (number != null) {

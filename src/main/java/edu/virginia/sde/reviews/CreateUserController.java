@@ -30,6 +30,17 @@ public class CreateUserController {
             handleInvalidEntryError();
             return;
         }
+
+       else if(enteredUsername.trim().isEmpty()){
+            handleInvalidEntryError();
+            return;
+        }
+
+        else if (enteredPassword.length() < 8 || enteredPassword.trim().length() < 8){
+            handleWrongPasswordLength();
+            return;
+        }
+
         else if(enteredUsername.equals("") || enteredPassword.equals("")){
             handleInvalidEntryError();
             return;
@@ -58,6 +69,11 @@ public class CreateUserController {
     public void handleInvalidEntryError(){
         createAccountLabel.setStyle("-fx-text-fill: red;");
         createAccountLabel.setText("Invalid Username or Password. Please try again.");
+    }
+
+    public void handleWrongPasswordLength(){
+        createAccountLabel.setStyle("-fx-text-fill: red;");
+        createAccountLabel.setText("Password must be 8 characters.");
     }
 
     public void handleAccountCreated(){
