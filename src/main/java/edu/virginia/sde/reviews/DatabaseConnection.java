@@ -141,6 +141,29 @@ public class DatabaseConnection {
         }
     }
 
+    public void updateReview(int reviewID, int rating, String comment, Timestamp timestamp) throws SQLException {
+        try {
+            var statement = connection.prepareStatement(
+                    """
+                            UPDATE REVIEWS
+                            SET rating = ?, comment = ?, timestamp = ?
+                            WHERE reviewID = ?
+                        """
+            );
+            statement.setInt(1, rating);
+            statement.setString(2, comment);
+            statement.setTimestamp(3, timestamp);
+            statement.setInt(4, reviewID);
+            int rows = statement.executeUpdate();
+            statement.close();
+            connection.commit();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            connection.rollback();
+            throw new SQLIntegrityConstraintViolationException();
+        }
+    }
+
     public String getPasswordByUsername(String givenUsername) throws SQLException{
         try{
             var statement = connection.prepareStatement(
@@ -292,6 +315,30 @@ public class DatabaseConnection {
                 courseReviews.add(new Review(reviewID, userID, courseID, rating, comment)); //fix this to make timestamp work
             }
             return courseReviews;
+        } catch(SQLException e){
+            connection.rollback();
+            throw(e);
+        }
+    }
+
+    public Review getUsersReviewsByCourseID(int userId, int courseId) throws SQLException {
+        try{
+            var statement = connection.prepareStatement(
+                    """
+                            SELECT * FROM Reviews WHERE UserID = ? AND CourseId = ?
+                            """);
+            statement.setInt(1, userId);
+            statement.setInt(2, courseId);
+            ResultSet rs = statement.executeQuery();
+            if(rs.next()) {
+                int reviewID = rs.getInt("ReviewID");
+                int userID = rs.getInt("UserID");
+                int courseID = rs.getInt("CourseID");
+                int rating = rs.getInt("Rating");
+                String comment = rs.getString("Comment");
+                return new Review(reviewID, userID, courseID, rating, comment);
+            }
+            else return null;
         } catch(SQLException e){
             connection.rollback();
             throw(e);

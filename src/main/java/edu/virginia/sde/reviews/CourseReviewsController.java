@@ -40,12 +40,17 @@ public class CourseReviewsController {
     @FXML
     private Label submitLabel;
 
+    @FXML
+    private Button submitButton;
+
     private User activeUser;
 
     private Course activeCourse;
 
     private Stage primaryStage;
     private ToggleGroup buttonGroup;
+
+    private Review activeReview;
 
     public void setActiveUser(User activeUser) { this.activeUser = activeUser; }
 
@@ -56,8 +61,6 @@ public class CourseReviewsController {
     }
 
     public void initialize(){
-        var courseReviewsService = new CourseReviewsService();
-
         buttonGroup = new ToggleGroup();
         rating1.setToggleGroup(buttonGroup);
         rating2.setToggleGroup(buttonGroup);
@@ -80,9 +83,37 @@ public class CourseReviewsController {
         activeCourseLabel.setText(activeCourse.toString());
     }
 
-    public void printActiveUserId(){
-        System.out.println(activeUser.getUsername());
+    public void setUserReview(){
+        CourseReviewsService courseReviewsService = new CourseReviewsService();
+        activeReview = courseReviewsService.getUserReview(activeUser.getId(), activeCourse.getCourseId());
+        if (activeReview != null){
+            submitButton.setText("Resubmit");
+            comment.setText(activeReview.getComment());
+            switch(activeReview.getRating()) {
+                case 1: {
+                    buttonGroup.selectToggle(rating1);
+                    break;
+                }
+                case 2: {
+                    buttonGroup.selectToggle(rating2);
+                    break;
+                }
+                case 3: {
+                    buttonGroup.selectToggle(rating3);
+                    break;
+                }
+                case 4: {
+                    buttonGroup.selectToggle(rating4);
+                    break;
+                }
+                case 5: {
+                    buttonGroup.selectToggle(rating5);
+                    break;
+                }
+            }
+        }
     }
+
 
     public void handleBackButton(){
         try {
@@ -103,8 +134,6 @@ public class CourseReviewsController {
         CourseReviewsService courseReviewsService = new CourseReviewsService();
         int courseId = activeCourse.getCourseId();
         int userId = activeUser.getId();
-        System.out.println(courseId);
-        System.out.println(userId);
         var toggle = (RadioButton) buttonGroup.getSelectedToggle();
         if (toggle == null){
             submitLabel.setText("Did not choose rating");
@@ -113,13 +142,23 @@ public class CourseReviewsController {
         else {
             String choice = toggle.getText();
             String commentString = comment.getText();
-            courseReviewsService.addReview(activeUser.getId(), activeCourse.getCourseId(), choice, commentString);
+            if (activeReview == null){
+                courseReviewsService.addReview(activeUser.getId(), activeCourse.getCourseId(), choice, commentString);
+                submitLabel.setText("Successfully submitted review!");
+                submitLabel.setVisible(true);
+            }
+            else {
+                courseReviewsService.updateReview(activeReview.getReviewID(), choice, commentString);
+                submitLabel.setText("Successfully updated review!");
+                submitLabel.setVisible(true);
+            }
             updateTable();
-            submitLabel.setText("Successfully submitted review!");
-            submitLabel.setVisible(true);
+
         }
     }
 
-
-
+    public void handleDeleteReviewButton(){
+        submitLabel.setText("Haven't done this button yet");
+        submitLabel.setVisible(true);
+    }
 }

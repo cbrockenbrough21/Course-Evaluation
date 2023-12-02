@@ -67,8 +67,8 @@ public class CourseSearchController {
             controller.setActiveCourse(selectedCourse);
             controller.setActiveCourseLabel();
             controller.setActiveUser(activeUser);
-            controller.printActiveUserId();
             controller.updateTable();
+            controller.setUserReview();
             controller.setPrimaryStage(primaryStage);
             primaryStage.setTitle("Course Review");
             primaryStage.setScene(scene);

@@ -30,6 +30,24 @@ public class CourseReviewsService {
         }
     }
 
+    public Review getUserReview(int userId, int courseId){
+        DatabaseConnection databaseConnection = null;
+        try {
+            databaseConnection = new DatabaseConnection();
+            return databaseConnection.getUsersReviewsByCourseID(userId, courseId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (databaseConnection != null) {
+                    databaseConnection.disconnect();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException();
+            }
+        }
+    }
+
     public void addReview(int userId, int courseId, String choice, String comment){
         int rating = getRating(choice);
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -37,6 +55,26 @@ public class CourseReviewsService {
         try {
             databaseConnection = new DatabaseConnection();
             databaseConnection.addReview(userId, courseId, rating, comment, timestamp);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (databaseConnection != null) {
+                    databaseConnection.disconnect();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException();
+            }
+        }
+    }
+
+    public void updateReview(int reviewId, String choice, String comment){
+        int rating = getRating(choice);
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        DatabaseConnection databaseConnection = null;
+        try {
+            databaseConnection = new DatabaseConnection();
+            databaseConnection.updateReview(reviewId, rating, comment, timestamp);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
