@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class LoginController {
 
@@ -48,13 +49,13 @@ public class LoginController {
         else{
             boolean matches = loginService.UsernamePasswordMatches(enteredUsername, enteredPassword);
             if(matches){
-                //log them in, so scene switch to the course review page
+                User newUser = new User(enteredUsername, enteredPassword, loginService.getUserID(enteredUsername));
                 try {
                     loginService = new LoginService();
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-search.fxml"));
                     Scene scene = new Scene(fxmlLoader.load());
                     var controller = (CourseSearchController) fxmlLoader.getController();
-                    controller.setActiveUser(new User(enteredUsername, enteredPassword, 1));
+                    controller.setActiveUser(newUser);
                     controller.setPrimaryStage(primaryStage);
                     primaryStage.setTitle("Course Search");
                     primaryStage.setScene(scene);
