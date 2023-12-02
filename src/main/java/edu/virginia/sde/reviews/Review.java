@@ -1,4 +1,5 @@
 package edu.virginia.sde.reviews;
+import java.security.Timestamp;
 
 public class Review {
     private int reviewID;
@@ -9,13 +10,13 @@ public class Review {
     private String timestamp;
 
     //Constructor for my review screen, can add another if class is used for writing reviews
-    public Review (int reviewID, int userID, int courseID, int rating, String comment) {
+    public Review (int reviewID, int userID, int courseID, int rating, String comment, Timestamp timestamp) {
         this.reviewID = reviewID;
         this.userID = userID;
         this.courseID = courseID;
         this.rating = rating;
         this.comment = comment;
-        this.timestamp = null;
+        this.timestamp = String.valueOf(timestamp);
     }
 
     public Review (int reviewID, int userID, int courseID, int rating, String comment, String timestamp) {
