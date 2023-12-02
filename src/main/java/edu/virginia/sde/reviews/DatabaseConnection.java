@@ -123,7 +123,7 @@ public class DatabaseConnection {
             var statement = connection.prepareStatement(
                     """
                             INSERT INTO REVIEWS(userId, courseId, rating, comment, timestamp)
-                            VALUES(?, ?, ?)
+                            VALUES(?, ?, ?, ?, ?)
                         """
             );
             statement.setInt(1, userID);

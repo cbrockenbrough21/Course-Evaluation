@@ -57,7 +57,6 @@ public class CourseReviewsController {
 
     public void initialize(){
         var courseReviewsService = new CourseReviewsService();
-        courseReviewsService.initialize();
 
         buttonGroup = new ToggleGroup();
         rating1.setToggleGroup(buttonGroup);
@@ -115,6 +114,9 @@ public class CourseReviewsController {
             String choice = toggle.getText();
             String commentString = comment.getText();
             courseReviewsService.addReview(activeUser.getId(), activeCourse.getCourseId(), choice, commentString);
+            updateTable();
+            submitLabel.setText("Successfully submitted review!");
+            submitLabel.setVisible(true);
         }
     }
 

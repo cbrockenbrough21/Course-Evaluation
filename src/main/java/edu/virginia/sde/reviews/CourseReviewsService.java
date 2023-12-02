@@ -6,14 +6,6 @@ import java.util.*;
 
 public class CourseReviewsService {
 
-    public void initialize(){
-        DatabaseConnection databaseConnection = null;
-        try {
-            databaseConnection = new DatabaseConnection();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public List<Review> getReviewList(Course course){
         int courseId = course.getCourseId();
@@ -27,17 +19,34 @@ public class CourseReviewsService {
             return reviewList;
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            try {
+                if (databaseConnection != null) {
+                    databaseConnection.disconnect();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException();
+            }
         }
     }
 
     public void addReview(int userId, int courseId, String choice, String comment){
         int rating = getRating(choice);
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        DatabaseConnection databaseConnection = null;
         try {
-            DatabaseConnection databaseConnection = new DatabaseConnection();
+            databaseConnection = new DatabaseConnection();
             databaseConnection.addReview(userId, courseId, rating, comment, timestamp);
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            try {
+                if (databaseConnection != null) {
+                    databaseConnection.disconnect();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException();
+            }
         }
     }
     public int getRating(String choice){
