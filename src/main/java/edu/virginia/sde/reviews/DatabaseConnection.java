@@ -67,7 +67,7 @@ public class DatabaseConnection {
                                 CourseID INTEGER NOT NULL,
                                 Rating INTEGER CHECK(Rating >=1 AND Rating<=5),
                                 Comment TEXT,
-                                Timestamp TEXT,
+                                Timestamp TIMESTAMP,
                                 FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE CASCADE,
                                 FOREIGN KEY (CourseID) REFERENCES Courses(CourseID) ON DELETE CASCADE
                             );
@@ -329,8 +329,8 @@ public class DatabaseConnection {
                 int courseID = rs.getInt("CourseID");
                 int rating = rs.getInt("Rating");
                 String comment = rs.getString("Comment");
-                Timestamp timestamp = rs.getTimestamp("Timestamp");
-                courseReviews.add(new Review(reviewID, userID, courseID, rating, comment, String.valueOf(timestamp))); //fix this to make timestamp work
+                //Timestamp timestamp = rs.getTimestamp("Timestamp");
+                courseReviews.add(new Review(reviewID, userID, courseID, rating, comment)); //fix this to make timestamp work
             }
             return courseReviews;
         } catch(SQLException e){
@@ -354,9 +354,7 @@ public class DatabaseConnection {
                 int courseID = rs.getInt("CourseID");
                 int rating = rs.getInt("Rating");
                 String comment = rs.getString("Comment");
-                Timestamp timestamp = Timestamp.valueOf(rs.getString("Timestamp"));
-
-                return new Review(reviewID, userID, courseID, rating, comment, String.valueOf(timestamp));
+                return new Review(reviewID, userID, courseID, rating, comment);
             }
             else return null;
         } catch(SQLException e){
