@@ -37,6 +37,7 @@ public class MyReviewsController {
             });
             return row;
         });
+        updateTable();
     }
 
     private void handleRowClick(Review selectedReview){
@@ -70,11 +71,16 @@ public class MyReviewsController {
         }
     }
 
-    //public String getActiveUsername(User activeUser) {return activeUser.getUsername(); }
+    public String getActiveUsername(User activeUser) {return activeUser.getUsername(); }
 
-    public void updateTable() {
-        MyReviewsService myReviewsService = new MyReviewsService();
-        List<Review> myReviewList = myReviewsService.getMyReviews(activeUser.getId());
+    private void updateTable() {
+        //eventually this will be querying a database but for now hard-coded
+
+
+        List<Review> myReviewList = new ArrayList<>();
+//        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+//        Review myReview = new Review("CS", 2100, 3.0, timestamp.toString());
+//        myReviewList.add(myReview);
         ObservableList<Review> obsList = FXCollections.observableList(myReviewList);
         tableView.getItems().clear();
         tableView.getItems().addAll(obsList);

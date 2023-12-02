@@ -25,5 +25,6 @@
                </children>
             </GridPane>
       <Label fx:id="loginError" layoutX="190.0" layoutY="275.0" />
+       <Button text="Close" onAction="#handleCloseButton" />
    </children>
 </AnchorPane>

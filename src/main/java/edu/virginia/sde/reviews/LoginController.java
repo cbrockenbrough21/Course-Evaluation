@@ -46,6 +46,7 @@ public class LoginController {
             handleLoginError();
             return;
         }
+
         else{
             boolean matches = loginService.UsernamePasswordMatches(enteredUsername, enteredPassword);
             if(matches){
@@ -90,6 +91,10 @@ public class LoginController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void handleCloseButton() {
+        System.exit(0);
     }
 
 }

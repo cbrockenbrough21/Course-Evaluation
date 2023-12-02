@@ -246,7 +246,7 @@ public class DatabaseConnection {
         StringBuilder sql = new StringBuilder("SELECT * FROM Courses WHERE 1=1");
 
         if (subject != null && !subject.isEmpty()) {
-            sql.append(" AND Subject = ?");
+            sql.append(" AND LOWER(Subject) = LOWER(?)");
         }
 
         if (number != null) {
@@ -329,32 +329,8 @@ public class DatabaseConnection {
                 int courseID = rs.getInt("CourseID");
                 int rating = rs.getInt("Rating");
                 String comment = rs.getString("Comment");
-                Timestamp timestamp = rs.getTimestamp("Timestamp");
+                //Timestamp timestamp = rs.getTimestamp("Timestamp");
                 courseReviews.add(new Review(reviewID, userID, courseID, rating, comment)); //fix this to make timestamp work
-            }
-            return courseReviews;
-        } catch(SQLException e){
-            connection.rollback();
-            throw(e);
-        }
-    }
-
-    public List<Review> getReviewsByUserID(int userID) throws SQLException {
-        try{
-            var statement = connection.prepareStatement(
-                    """
-                            SELECT * FROM Reviews WHERE UserID = ?
-                            """);
-            statement.setInt(1, userID);
-            ResultSet rs = statement.executeQuery();
-            List<Review> courseReviews = new ArrayList<>();
-            while(rs.next()){
-                int reviewID = rs.getInt("ReviewID");
-                int courseID = rs.getInt("CourseID");
-                int rating = rs.getInt("Rating");
-                String comment = rs.getString("Comment");
-                Timestamp timestamp = rs.getTimestamp("Timestamp");
-                courseReviews.add(new Review(reviewID, userID, courseID, rating, comment));
             }
             return courseReviews;
         } catch(SQLException e){
