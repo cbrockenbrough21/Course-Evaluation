@@ -12,13 +12,11 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import java.lang.reflect.InvocationTargetException;
 
-import java.io.IOException;
-import java.math.RoundingMode;
+import java.io.IOException;;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.math.BigDecimal;
 
 public class CourseSearchController {
     DatabaseConnection databaseConnection;
@@ -158,8 +156,8 @@ public class CourseSearchController {
                 rev_count++;
                 cum_rating = cum_rating + review.getRating();
             }
-            double avg = (cum_rating / rev_count);
-            course.setRating(avg);
+            String avg = String.format("%.2f", (cum_rating / rev_count));
+            course.setRating(Double.parseDouble(avg));
         }
         ObservableList<Course> obsList = FXCollections.observableList(courseList);
         tableView.getItems().clear();
