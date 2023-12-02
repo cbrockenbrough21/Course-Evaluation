@@ -46,6 +46,7 @@ public class LoginController {
             handleLoginError();
             return;
         }
+
         else{
             boolean matches = loginService.UsernamePasswordMatches(enteredUsername, enteredPassword);
             if(matches){
