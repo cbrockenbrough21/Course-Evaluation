@@ -132,4 +132,21 @@ public class CourseReviewsService {
         return rating;
     }
 
+    public void displayAverageRating(CourseReviewsService service, List<Course> courseList) {
+        for (Course course : courseList) {
+            double cum_rating = 0.0;
+            int rev_count = 0;
+            List<Review> courseReviews = service.getReviewList(course);
+            for (Review review : courseReviews) {
+                rev_count++;
+                cum_rating = cum_rating + review.getRating();
+            }
+            String avg = String.format("%.2f", (cum_rating / rev_count));
+            if (courseReviews.isEmpty()) {
+                avg = "";
+            }
+            course.setRating(avg);
+        }
+    }
+
 }

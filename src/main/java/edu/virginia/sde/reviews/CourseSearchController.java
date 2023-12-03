@@ -87,8 +87,10 @@ public class CourseSearchController {
             Integer number = numberTextField.getText().isEmpty() ? null : Integer.parseInt(numberTextField.getText());
             String title = titleTextField.getText();
 
-            CourseSearchService courseSearchService = new CourseSearchService();
+            var courseSearchService = new CourseSearchService();
+            var courseReviewService = new CourseReviewsService();
             List<Course> searchResults = courseSearchService.findAllCourses(subject, number, title);
+            courseReviewService.displayAverageRating(courseReviewService, searchResults);
 
             ObservableList<Course> obsList = FXCollections.observableList(searchResults);
             tableView.getItems().clear();
@@ -148,20 +150,7 @@ public class CourseSearchController {
         var courseSearchService = new CourseSearchService();
         var courseReviewService = new CourseReviewsService();
         List<Course> courseList = courseSearchService.getCourses();
-        for (Course course : courseList) {
-            double cum_rating = 0.0;
-            int rev_count = 0;
-            List<Review> courseReviews = courseReviewService.getReviewList(course);
-            for (Review review : courseReviews) {
-                rev_count++;
-                cum_rating = cum_rating + review.getRating();
-            }
-            String avg = String.format("%.2f", (cum_rating / rev_count));
-            if (courseReviews.isEmpty()) {
-                avg = "";
-            }
-            course.setRating(avg);
-        }
+        courseReviewService.displayAverageRating(courseReviewService, courseList);
         ObservableList<Course> obsList = FXCollections.observableList(courseList);
         tableView.getItems().clear();
         tableView.getItems().addAll(obsList);
