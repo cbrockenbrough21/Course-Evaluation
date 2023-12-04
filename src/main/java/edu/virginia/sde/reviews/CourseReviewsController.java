@@ -91,6 +91,7 @@ public class CourseReviewsController {
         activeReview = courseReviewsService.getUserReview(activeUser.getId(), activeCourse.getCourseId());
         if (activeReview != null){
             submitButton.setText("Resubmit");
+            deleteButton.setVisible(true);
             comment.setText(activeReview.getComment());
             switch(activeReview.getRating()) {
                 case 1: {
@@ -118,6 +119,7 @@ public class CourseReviewsController {
         else {
             submitButton.setText("Submit");
             comment.setText("");
+            deleteButton.setVisible(false);
             buttonGroup.selectToggle(null);
         }
     }

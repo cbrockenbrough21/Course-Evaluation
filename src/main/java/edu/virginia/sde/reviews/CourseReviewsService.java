@@ -9,7 +9,6 @@ public class CourseReviewsService {
 
     public List<Review> getReviewList(Course course){
         int courseId = course.getCourseId();
-        System.out.println("this is the courseID: " + courseId);
         List<Review> reviewList = null;
 
         DatabaseConnection databaseConnection = null;
