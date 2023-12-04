@@ -39,9 +39,15 @@ List the primary contributions of each author. It is recommended to update this 
 
 ### Olivia Warren
 
-* Author 4 contributions
-* as a bulleted list
-* each line starts with an asterisk and a space
+* connected the Login page to the database to create new accounts, produce necessary error messages,
+    log in an existing user, and ensure their correct data is pulled up when logged in
+* reformatted some existing controllers to connect to the database through a service class
+* formatted the fxml file for login and create-user
+* helped rework DatabaseConnection to allow for easier connections
+* created User and Review classes
+* worked on bugs with passing activeUser between scenes
+* wrote database queries for various service classes
+* helped make MyReviews scene connect to the correct User's reviews as well as fixed a bug with passing activeCourse
 
 ## Issues
 
