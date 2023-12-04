@@ -11,15 +11,17 @@ public class Review {
     private int rating;
     private String comment;
     private Timestamp timestamp;
+    private Course course;
 
     //Constructor for my review screen, can add another if class is used for writing reviews
-    public Review (int reviewID, int userID, int courseID, int rating, String comment, Timestamp timestamp) {
+    public Review (int reviewID, int userID, int courseID, int rating, String comment, Timestamp timestamp, Course course) {
         this.reviewID = reviewID;
         this.userID = userID;
         this.courseID = courseID;
         this.rating = rating;
         this.comment = comment;
         this.timestamp = convertToLocalTime(timestamp);
+        this.course = course;
     }
 
     private Timestamp convertToLocalTime(Timestamp timestamp) {
@@ -84,4 +86,8 @@ public class Review {
     public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
     }
+
+    public void setCourse(Course course) { this.course = course; }
+
+    public Course getCourse() { return course; }
 }
