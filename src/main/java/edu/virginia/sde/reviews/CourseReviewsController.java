@@ -119,6 +119,7 @@ public class CourseReviewsController {
         else {
             submitButton.setText("Submit");
             comment.setText("");
+            deleteButton.setVisible(false);
             buttonGroup.selectToggle(null);
         }
     }
