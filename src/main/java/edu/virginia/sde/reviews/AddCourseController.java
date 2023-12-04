@@ -26,6 +26,12 @@ public class AddCourseController{
 
     private Course activeCourse;
 
+    private User activeUser;
+
+
+
+    public void setActiveUser(User activeUser) { this.activeUser = activeUser; }
+
 
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -37,7 +43,7 @@ public class AddCourseController{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-search.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             var controller = (CourseSearchController) fxmlLoader.getController();
-            //controller.setActiveCourse(activeCourse);
+            controller.setActiveUser(activeUser);
             controller.setPrimaryStage(primaryStage);
             primaryStage.setTitle("Course Search");
             primaryStage.setScene(scene);
