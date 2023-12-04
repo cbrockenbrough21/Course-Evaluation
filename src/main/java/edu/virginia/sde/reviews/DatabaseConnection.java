@@ -341,6 +341,30 @@ public class DatabaseConnection {
         }
     }
 
+    public List<Review> getReviewsByUserID(int userID) throws SQLException {
+        try{
+            var statement = connection.prepareStatement(
+                    """
+                            SELECT * FROM Reviews WHERE UserID = ?
+                            """);
+            statement.setInt(1, userID);
+            ResultSet rs = statement.executeQuery();
+            List<Review> courseReviews = new ArrayList<>();
+            while(rs.next()){
+                int reviewID = rs.getInt("ReviewID");
+                int courseID = rs.getInt("CourseID");
+                int rating = rs.getInt("Rating");
+                String comment = rs.getString("Comment");
+                Timestamp timestamp = rs.getTimestamp("Timestamp");
+                courseReviews.add(new Review(reviewID, userID, courseID, rating, comment, timestamp));
+            }
+            return courseReviews;
+        } catch(SQLException e){
+            connection.rollback();
+            throw(e);
+        }
+    }
+
     public Review getUsersReviewsByCourseID(int userId, int courseId) throws SQLException {
         try{
             var statement = connection.prepareStatement(
