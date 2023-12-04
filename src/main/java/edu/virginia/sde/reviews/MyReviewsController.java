@@ -40,12 +40,18 @@ public class MyReviewsController {
     }
 
     private void handleRowClick(Review selectedReview){
+        MyReviewsService myReviewsService = new MyReviewsService();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-review.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             var controller = (CourseReviewsController) fxmlLoader.getController();
             controller.setPrimaryStage(primaryStage);
-            //controller.setActiveCourse();
+            Course selectedCourse = myReviewsService.getCoursebyCourseId(selectedReview.getCourseID());
+            controller.setActiveCourse(selectedCourse);
+            controller.setActiveUser(activeUser);
+            controller.setActiveCourseLabel();
+            controller.updateTable();
+            controller.setUserReview();
             primaryStage.setTitle("Course Review");
             primaryStage.setScene(scene);
             primaryStage.show();
