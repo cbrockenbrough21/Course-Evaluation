@@ -44,9 +44,12 @@ public class MyReviewsController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-review.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             var controller = (CourseReviewsController) fxmlLoader.getController();
-            controller.setPrimaryStage(primaryStage);
-            controller.setActiveUser(activeUser);
             controller.setActiveCourse(selectedReview.getCourse());
+            controller.setActiveCourseLabel();
+            controller.setActiveUser(activeUser);
+            controller.updateTable();
+            controller.setUserReview();
+            controller.setPrimaryStage(primaryStage);
             primaryStage.setTitle("Course Review");
             primaryStage.setScene(scene);
             primaryStage.show();
