@@ -22,4 +22,22 @@ public class MyReviewsService {
             }
         }
     }
+
+    public Course getCoursebyCourseId(int courseID){
+        DatabaseConnection databaseConnection = null;
+        try {
+            databaseConnection = new DatabaseConnection();
+            return databaseConnection.getCourseByCourseID(courseID);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (databaseConnection != null) {
+                    databaseConnection.disconnect();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException();
+            }
+        }
+    }
 }
