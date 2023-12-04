@@ -45,7 +45,8 @@ public class MyReviewsController {
             Scene scene = new Scene(fxmlLoader.load());
             var controller = (CourseReviewsController) fxmlLoader.getController();
             controller.setPrimaryStage(primaryStage);
-            //controller.setActiveCourse();
+            controller.setActiveUser(activeUser);
+            controller.setActiveCourse(selectedReview.getCourse());
             primaryStage.setTitle("Course Review");
             primaryStage.setScene(scene);
             primaryStage.show();

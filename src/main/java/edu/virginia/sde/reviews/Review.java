@@ -98,4 +98,8 @@ public class Review {
     public void setCourseNumber(int courseNumber) { this.course.setCourseNumber(courseNumber); }
 
     public int getCourseNumber() { return course.getCourseNumber(); }
+
+    public Course getCourse() { return course; }
+
+    public void setCourse(Course course) { this.course = course; }
 }
