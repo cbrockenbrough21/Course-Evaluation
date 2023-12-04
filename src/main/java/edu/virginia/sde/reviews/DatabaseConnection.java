@@ -282,8 +282,9 @@ public class DatabaseConnection {
                 String retrievedSubject = rs.getString("Subject");
                 int retrievedNumber = rs.getInt("Number");
                 String retrievedTitle = rs.getString("Title");
+                int courseID = rs.getInt("CourseID");
 
-                Course course = new Course(retrievedSubject, retrievedNumber, retrievedTitle, 1);
+                Course course = new Course(retrievedSubject, retrievedNumber, retrievedTitle, courseID);
                 courses.add(course);
             }
 
