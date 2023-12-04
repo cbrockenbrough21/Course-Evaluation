@@ -401,12 +401,15 @@ public class DatabaseConnection {
                             """);
             statement.setInt(1, courseID);
             ResultSet rs = statement.executeQuery();
+            String subject = null;
+            int number = -1;
+            String title = null;
             while(rs.next()){
-                String subject = rs.getString("Subject");
-                int number = rs.getInt("Number");
-                String title = rs.getString("Title");
-                return new Course(subject, number, title, courseID);
+                subject = rs.getString("Subject");
+                number = rs.getInt("Number");
+                title = rs.getString("Title");
             }
+            return new Course(subject, number, title, courseID);
         } catch(SQLException e){
             connection.rollback();
             throw(e);

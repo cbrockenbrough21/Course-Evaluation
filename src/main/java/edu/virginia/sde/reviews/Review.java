@@ -12,6 +12,8 @@ public class Review {
     private String comment;
     private Timestamp timestamp;
     private Course course;
+    private String subject;
+    private int courseNumber;
 
     //Constructor for my review screen, can add another if class is used for writing reviews
     public Review (int reviewID, int userID, int courseID, int rating, String comment, Timestamp timestamp, Course course) {
@@ -22,6 +24,8 @@ public class Review {
         this.comment = comment;
         this.timestamp = convertToLocalTime(timestamp);
         this.course = course;
+        subject = course.getSubject();
+        courseNumber = course.getCourseNumber();
     }
 
     private Timestamp convertToLocalTime(Timestamp timestamp) {
@@ -87,7 +91,11 @@ public class Review {
         this.timestamp = timestamp;
     }
 
-    public void setCourse(Course course) { this.course = course; }
+    public void setSubject(String subject) { this.course.setSubject(subject); }
 
-    public Course getCourse() { return course; }
+    public String getSubject() { return course.getSubject(); }
+
+    public void setCourseNumber(int courseNumber) { this.course.setCourseNumber(courseNumber); }
+
+    public int getCourseNumber() { return course.getCourseNumber(); }
 }
