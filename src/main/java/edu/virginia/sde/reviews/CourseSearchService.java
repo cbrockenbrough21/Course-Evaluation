@@ -6,6 +6,7 @@ import java.util.List;
 public class CourseSearchService {
 
     //Function that returns all of the courses given any combination of title, subject, and number
+
     public List<Course> findAllCourses(String subject, Integer number, String title) {
         DatabaseConnection databaseConnection = null;
         try {

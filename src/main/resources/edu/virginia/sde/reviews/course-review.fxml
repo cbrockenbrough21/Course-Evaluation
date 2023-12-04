@@ -25,15 +25,15 @@
              </TableView>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                   <RadioButton fx:id = "rating1" mnemonicParsing="false" text="1"/>
-                   <RadioButton fx:id = "rating2" mnemonicParsing="false" text="2" />
-                   <RadioButton fx:id = "rating3" mnemonicParsing="false" text="3" />
-                   <RadioButton fx:id = "rating4" mnemonicParsing="false" text="4" />
-                   <RadioButton fx:id = "rating5" mnemonicParsing="false" text="5" />
-                  <TextField fx:id = "comment" prefHeight="97.0" prefWidth="166.0" />
-                  <Button fx:id ="submitButton" mnemonicParsing="false" text="Submit" onAction="#handleSubmitReviewButton"/>
-                   <Button fx:id = "deleteButton" visible ="false" mnemonicParsing="false" text="Delete" onAction="#handleDeleteReviewButton"/>
-                   <Label fx:id = "submitLabel" visible="false" text="Info about submission"/>
+                   <RadioButton fx:id="rating1" mnemonicParsing="false" text="1" />
+                   <RadioButton fx:id="rating2" mnemonicParsing="false" text="2" />
+                   <RadioButton fx:id="rating3" mnemonicParsing="false" text="3" />
+                   <RadioButton fx:id="rating4" mnemonicParsing="false" text="4" />
+                   <RadioButton fx:id="rating5" mnemonicParsing="false" text="5" />
+                  <TextField fx:id="comment" prefHeight="97.0" prefWidth="166.0" />
+                  <Button fx:id="submitButton" mnemonicParsing="false" onAction="#handleSubmitReviewButton" prefWidth="89.0" text="Submit" />
+                   <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#handleDeleteReviewButton" prefHeight="26.0" prefWidth="74.0" text="Delete" visible="false" />
+                   <Label fx:id="submitLabel" text="Info about submission" visible="false" />
                </children></HBox>
          </children></VBox>
    </children>

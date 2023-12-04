@@ -366,6 +366,30 @@ public class DatabaseConnection {
         }
     }
 
+    public List<Review> getReviewsByUserID(int userID) throws SQLException {
+        try{
+            var statement = connection.prepareStatement(
+                    """
+                            SELECT * FROM Reviews WHERE UserID = ?
+                            """);
+            statement.setInt(1, userID);
+            ResultSet rs = statement.executeQuery();
+            List<Review> usersReviews = new ArrayList<>();
+            while(rs.next()){
+                int reviewID = rs.getInt("ReviewID");
+                int courseID = rs.getInt("CourseID");
+                int rating = rs.getInt("Rating");
+                String comment = rs.getString("Comment");
+                Timestamp timestamp = rs.getTimestamp("Timestamp");
+                usersReviews.add(new Review(reviewID, userID, courseID, rating, comment, timestamp)); //fix this to make timestamp work
+            }
+            return usersReviews;
+        } catch(SQLException e){
+            connection.rollback();
+            throw(e);
+        }
+    }
+
     public void disconnect() throws SQLException {
         connection.close();
     }
