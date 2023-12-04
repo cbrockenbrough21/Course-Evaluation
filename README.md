@@ -17,9 +17,11 @@ List the primary contributions of each author. It is recommended to update this 
 
 ### Riley Wilson
 
-* Author 1 contributions
-* as a bulleted list
-* each line starts with an asterisk and a space
+* Built feature where you can search course by subject, number, and title
+* Added close button on login page
+* Converted timestamp to local time and added to reviews tables
+* Added error messages for user creation
+* Helped build database tables
 
 ### Catherine Brockenbrough
 
