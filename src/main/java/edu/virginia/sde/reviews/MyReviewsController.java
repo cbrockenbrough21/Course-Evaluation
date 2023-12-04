@@ -37,7 +37,6 @@ public class MyReviewsController {
             });
             return row;
         });
-        updateTable();
     }
 
     private void handleRowClick(Review selectedReview){
