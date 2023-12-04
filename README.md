@@ -23,9 +23,13 @@ List the primary contributions of each author. It is recommended to update this 
 
 ### Catherine Brockenbrough
 
-* Author 2 contributions
-* as a bulleted list
-* each line starts with an asterisk and a space
+* built section for users to add their own reviews, update them and delete them
+* formatted fxml file for course review page, my reviews, course search page and course search page
+* worked on passing activeUser and activeCourse between pages
+* set up screen switch buttons, back buttons, log out button, my reviews button
+* set up tableView for course review and my review page 
+* made course review table clickable and go to the correct course's review page
+* wrote database queries 
 
 ### Laine Quillian
 
