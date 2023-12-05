@@ -62,11 +62,25 @@ public class AddCourseController{
         boolean validCourse = addCourseService.isValidSubject(subjectString) &&
                               addCourseService.isValidCourseNumber(numberString) &&
                               addCourseService.isValidTitle(titleString);
+
         if (!validCourse) {
-            courseAddLabel.setStyle("-fx-text-fill: red;");
-            courseAddLabel.setText("Unable to add the course because invalid input. Please try again. ");
-            courseAddLabel.setVisible(true);
+            if (!addCourseService.isValidSubject(subjectString) && !subjectString.isEmpty()) {
+                courseAddLabel.setStyle("-fx-text-fill: red;");
+                courseAddLabel.setText("Unable to add - please try again with a 2-4 character subject.");
+                courseAddLabel.setVisible(true);
+            }
+            else if (!addCourseService.isValidCourseNumber(numberString) && !numberString.isEmpty()) {
+                courseAddLabel.setStyle("-fx-text-fill: red;");
+                courseAddLabel.setText("Unable to add - please try again with a 4 integer number.");
+                courseAddLabel.setVisible(true);
+            }
+            else if (subjectString.isEmpty() || numberString.isEmpty() || titleString.isEmpty()) {
+                courseAddLabel.setStyle("-fx-text-fill: red;");
+                courseAddLabel.setText("At least one input is missing. Please add a course by filling out all fields.");
+                courseAddLabel.setVisible(true);
+            }
         }
+
         if (validCourse) {
             int course_number = Integer.parseInt(numberString);
             boolean successfulAdd = addCourseService.addIfNotExists(subjectString, course_number, titleString);

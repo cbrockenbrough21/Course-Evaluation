@@ -88,11 +88,6 @@ public class CourseSearchController {
             String subject = subjectTextField.getText();
             Integer number = null;
 
-            if (subject.length() == 1 || subject.length() > 4) {
-                handleInvalidMnemonicError();
-                return;
-            }
-
             if (!numberTextField.getText().isEmpty()) {
                 try {
                     number = Integer.parseInt(numberTextField.getText());
@@ -112,6 +107,11 @@ public class CourseSearchController {
             ObservableList<Course> obsList = FXCollections.observableList(searchResults);
             tableView.getItems().clear();
             tableView.getItems().addAll(obsList);
+
+            if (subject.length() == 1 || subject.length() > 4) {
+                handleInvalidMnemonicError();
+                return;
+            }
 
             if (searchResults.isEmpty()) {
                 handleCourseSearchError();
