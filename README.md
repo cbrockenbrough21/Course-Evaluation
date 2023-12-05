@@ -25,6 +25,7 @@ List the primary contributions of each author. It is recommended to update this 
 * Helped edit database tables to new structure
 * Tested that all wrong inputs give error messages
 * Fixed crashes when inputting wrong types into course search
+* Error messages for leading/reailing spaces
 
 ### Catherine Brockenbrough
 
