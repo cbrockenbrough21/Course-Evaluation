@@ -80,7 +80,7 @@ public class LoginController {
             Scene scene = new Scene(fxmlLoader.load());
             var controller = (CreateUserController) fxmlLoader.getController();
             controller.setPrimaryStage(primaryStage);
-            primaryStage.setTitle("Course Search");
+            primaryStage.setTitle("Create New User");
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {
