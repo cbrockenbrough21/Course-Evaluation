@@ -9,7 +9,6 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 public class CourseReviewsController {
@@ -81,12 +80,12 @@ public class CourseReviewsController {
     }
 
     public void setActiveCourseLabel() {
-        updateAvgRating();
+        setAvgRating();
         activeCourseLabel.setStyle("-fx-text-fill: navy;");
         activeCourseLabel.setText(activeCourse.toString() + " - " + "Average Rating: " + activeCourse.getRating());
     }
 
-    public void updateAvgRating() {
+    public void setAvgRating() {
         var courseReviewsService = new CourseReviewsService();
         double cum_rating = 0.0;
         int rev_count = 0;
@@ -168,6 +167,7 @@ public class CourseReviewsController {
             String commentString = comment.getText();
             if (activeReview == null){
                 courseReviewsService.addReview(activeUser.getId(), activeCourse.getCourseId(), choice, commentString);
+                setAvgRating();
                 submitLabel.setText("Successfully submitted review!");
                 submitLabel.setVisible(true);
                 submitButton.setText("Save");
@@ -175,6 +175,7 @@ public class CourseReviewsController {
             }
             else {
                 courseReviewsService.updateReview(activeReview.getReviewID(), choice, commentString);
+                setAvgRating();
                 submitLabel.setText("Successfully updated review!");
                 submitLabel.setVisible(true);
             }
@@ -188,6 +189,7 @@ public class CourseReviewsController {
         if (activeReview != null){
             CourseReviewsService courseReviewsService = new CourseReviewsService();
             courseReviewsService.deleteReview(activeReview.getReviewID());
+            setAvgRating();
             activeReview = null;
             updateTable();
             setUserReview();
