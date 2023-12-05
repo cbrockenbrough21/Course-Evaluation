@@ -7,7 +7,8 @@ import java.util.regex.Pattern;
 
 public class AddCourseService {
 
-    public boolean isValidSubject(String subject) {
+    public boolean isValidSubject(String subject1) {
+        String subject = trim(subject1);
         var p = Pattern.compile("[A-Za-z]{2,4}");
         return p.matcher(subject).matches();
     }
@@ -16,8 +17,20 @@ public class AddCourseService {
         return String.valueOf(course_number).matches("\\d{4}");
     }
 
-    public boolean isValidTitle(String title) {
+    public boolean isValidTitle(String title1) {
+        String title = trim(title1);
         return !title.isEmpty() && title.length() <= 50;
+    }
+
+    public String trim (String input) {
+        StringBuilder sb = new StringBuilder(input);
+        while (!sb.isEmpty() && Character.isWhitespace(sb.charAt(0))) {
+            sb.deleteCharAt(0);
+        }
+        while (!sb.isEmpty() && Character.isWhitespace(sb.charAt(sb.length() - 1))) {
+            sb.deleteCharAt(sb.length() - 1);
+        }
+        return sb.toString();
     }
 
     public int getCourseID(String subject, String number, String title){
