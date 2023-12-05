@@ -14,7 +14,7 @@ public class CreateUserController {
     @FXML
     public TextField username;
     @FXML
-    public PasswordField password;
+    public TextField password;
     @FXML
     public Label createAccountLabel;
     private User activeUser;
@@ -41,7 +41,7 @@ public class CreateUserController {
             return;
         }
 
-        else if(enteredUsername.equals("") || enteredPassword.equals("")){
+        else if(enteredUsername.isEmpty()){
             handleInvalidEntryError();
             return;
         }
