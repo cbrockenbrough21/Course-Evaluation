@@ -86,7 +86,17 @@ public class CourseSearchController {
         try{
             courseSearchError.setText("");
             String subject = subjectTextField.getText();
-            Integer number = numberTextField.getText().isEmpty() ? null : Integer.parseInt(numberTextField.getText());
+            Integer number = null;
+
+            if (!numberTextField.getText().isEmpty()) {
+                try {
+                    number = Integer.parseInt(numberTextField.getText());
+                } catch (NumberFormatException ex) {
+                    handleInvalidInputError();
+                    return;
+                }
+            }
+
             String title = titleTextField.getText();
 
             var courseSearchService = new CourseSearchService();
@@ -104,6 +114,11 @@ public class CourseSearchController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void handleInvalidInputError() {
+        courseSearchError.setStyle("-fx-text-fill: red;");
+        courseSearchError.setText("Invalid input for the course number. Please enter a valid integer.");
     }
 
     public void handleCourseSearchError() {
