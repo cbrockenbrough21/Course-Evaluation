@@ -107,23 +107,23 @@ public class CourseReviewsService {
     public int getRating(String choice){
         int rating = -1;
         switch(choice){
-            case "1": {
+            case "rating1": {
                 rating = 1;
                 break;
             }
-            case "2": {
+            case "rating2": {
                 rating = 2;
                 break;
             }
-            case "3": {
+            case "rating3": {
                 rating = 3;
                 break;
             }
-            case "4": {
+            case "rating4": {
                 rating = 4;
                 break;
             }
-            case "5": {
+            case "rating5": {
                 rating = 5;
                 break;
             }

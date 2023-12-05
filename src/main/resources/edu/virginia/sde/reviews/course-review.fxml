@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
@@ -23,29 +24,77 @@
                          </cellValueFactory></TableColumn>
                  </columns>
              </TableView>
-             <Label text="Your review" />
+             <Label alignment="CENTER" prefHeight="17.0" prefWidth="635.0" text="Your Review:" />
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                    <VBox>
-                       <Label text="Rating (Required)" />
+                       <Label text="Rating (Required)">
+                        <opaqueInsets>
+                           <Insets />
+                        </opaqueInsets></Label>
                        <HBox>
-                           <RadioButton fx:id="rating1" mnemonicParsing="false" text="1" />
-                           <RadioButton fx:id="rating2" mnemonicParsing="false" text="2" />
-                           <RadioButton fx:id="rating3" mnemonicParsing="false" text="3" />
-                           <RadioButton fx:id="rating4" mnemonicParsing="false" text="4" />
-                           <RadioButton fx:id="rating5" mnemonicParsing="false" text="5" />
+                           <VBox>
+                               <Label alignment="CENTER" prefHeight="17.0" prefWidth="20.0" text="1">
+                              <padding>
+                                 <Insets right="4.0" />
+                              </padding></Label>
+                               <RadioButton fx:id="rating1" contentDisplay="CENTER" mnemonicParsing="false" />
+                           </VBox>
+                           <VBox>
+                               <Label alignment="CENTER" prefHeight="17.0" prefWidth="20.0" text="2">
+                              <padding>
+                                 <Insets right="4.0" />
+                              </padding></Label>
+                               <RadioButton fx:id="rating2" mnemonicParsing="false" />
+                           </VBox>
+                           <VBox>
+                               <Label alignment="CENTER" prefHeight="17.0" prefWidth="20.0" text="3">
+                              <padding>
+                                 <Insets right="4.0" />
+                              </padding></Label>
+                               <RadioButton fx:id="rating3" mnemonicParsing="false" />
+                           </VBox>
+                           <VBox>
+                               <Label alignment="CENTER" prefHeight="17.0" prefWidth="20.0" text="4" />
+                               <RadioButton fx:id="rating4" mnemonicParsing="false">
+                              <padding>
+                                 <Insets right="4.0" />
+                              </padding></RadioButton>
+                           </VBox>
+                           <VBox>
+                               <Label alignment="CENTER" prefHeight="17.0" prefWidth="20.0" text="5" />
+                               <RadioButton fx:id="rating5" mnemonicParsing="false" />
+                           </VBox>
+                        <opaqueInsets>
+                           <Insets />
+                        </opaqueInsets>
+                        <padding>
+                           <Insets top="12.0" />
+                        </padding>
                        </HBox>
+                     <padding>
+                        <Insets left="20.0" right="20.0" />
+                     </padding>
                    </VBox>
                    <VBox>
                        <Label text="Comment" />
                        <TextField fx:id="comment" prefHeight="74.0" prefWidth="239.0" />
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
                    </VBox>
                    <VBox>
-                       <Button fx:id="submitButton" mnemonicParsing="false" onAction="#handleSubmitReviewButton" prefWidth="89.0" text="Submit" />
-                       <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#handleDeleteReviewButton" prefHeight="26.0" prefWidth="74.0" text="Delete" visible="false" />
+                       <Button fx:id="submitButton" mnemonicParsing="false" onAction="#handleSubmitReviewButton" prefHeight="26.0" prefWidth="60.0" text="Submit" />
+                       <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#handleDeleteReviewButton" prefHeight="26.0" prefWidth="60.0" text="Delete" visible="false" />
                        <Label fx:id="submitLabel" text="Info about submission" visible="false" />
+                     <padding>
+                        <Insets left="4.0" />
+                     </padding>
                    </VBox>
-               </children></HBox>
+               </children>
+               <padding>
+                  <Insets top="2.0" />
+               </padding></HBox>
          </children></VBox>
    </children>
 </AnchorPane>

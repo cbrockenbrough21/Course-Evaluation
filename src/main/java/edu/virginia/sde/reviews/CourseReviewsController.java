@@ -90,7 +90,7 @@ public class CourseReviewsController {
         CourseReviewsService courseReviewsService = new CourseReviewsService();
         activeReview = courseReviewsService.getUserReview(activeUser.getId(), activeCourse.getCourseId());
         if (activeReview != null){
-            submitButton.setText("Resubmit");
+            submitButton.setText("Save");
             deleteButton.setVisible(true);
             comment.setText(activeReview.getComment());
             switch(activeReview.getRating()) {
@@ -148,13 +148,13 @@ public class CourseReviewsController {
             submitLabel.setVisible(true);
         }
         else {
-            String choice = toggle.getText();
+            String choice = toggle.getId();
             String commentString = comment.getText();
             if (activeReview == null){
                 courseReviewsService.addReview(activeUser.getId(), activeCourse.getCourseId(), choice, commentString);
                 submitLabel.setText("Successfully submitted review!");
                 submitLabel.setVisible(true);
-                submitButton.setText("Resubmit");
+                submitButton.setText("Save");
                 activeReview = courseReviewsService.getUserReview(activeUser.getId(), activeCourse.getCourseId());
             }
             else {
