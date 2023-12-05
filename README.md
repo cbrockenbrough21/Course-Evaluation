@@ -37,17 +37,23 @@ List the primary contributions of each author. It is recommended to update this 
 
 ### Laine Quillian
 
-* Author 3 contributions
-* as a bulleted list
-* each line starts with an asterisk and a space
+* connected the add Course page to the database to add new Courses -- displayed appropriate error messages
+    if the course was already added or if there was invalid input
+* helped format the My Review fxml
+* Reformatted Course Database for constraints at software rather than database level
+* Displayed average review on the course search page
+* Displayed average review for the active course in course reviews to simultaneously update
+* Changed the password field in the login screen to block the text
+* Formatted course search warming to only display with improper searches
 
 ### Olivia Warren
 
 * connected the Login page to the database to create new accounts, produce necessary error messages,
     log in an existing user, and ensure their correct data is pulled up when logged in
 * reformatted some existing controllers to connect to the database through a service class
-* formatted the fxml file for login and create-user
+* formatted the fxml file/controller for login and create-user
 * helped rework DatabaseConnection to allow for easier connections
+* fixed major bug with connections in service class that was not allowing the database to be created
 * created User and Review classes
 * worked on bugs with passing activeUser between scenes
 * wrote database queries for various service classes
