@@ -24,6 +24,7 @@ List the primary contributions of each author. It is recommended to update this 
 * Built original structure of database tables
 * Helped edit database tables to new structure
 * Tested that all wrong inputs give error messages
+* Fixed crashes when inputting wrong types into course search
 
 ### Catherine Brockenbrough
 
@@ -45,6 +46,7 @@ List the primary contributions of each author. It is recommended to update this 
 * Displayed average review for the active course in course reviews to simultaneously update
 * Changed the password field in the login screen to block the text
 * Formatted course search warming to only display with improper searches
+* Add unique error messages to invalid input for adding a course
 
 ### Olivia Warren
 
