@@ -42,8 +42,9 @@ List the primary contributions of each author. It is recommended to update this 
 * connected the Login page to the database to create new accounts, produce necessary error messages,
     log in an existing user, and ensure their correct data is pulled up when logged in
 * reformatted some existing controllers to connect to the database through a service class
-* formatted the fxml file for login and create-user
+* formatted the fxml file/controller for login and create-user
 * helped rework DatabaseConnection to allow for easier connections
+* fixed major bug with connections in service class that was not allowing the database to be created
 * created User and Review classes
 * worked on bugs with passing activeUser between scenes
 * wrote database queries for various service classes
