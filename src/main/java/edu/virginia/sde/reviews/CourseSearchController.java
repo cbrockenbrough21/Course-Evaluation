@@ -88,6 +88,11 @@ public class CourseSearchController {
             String subject = subjectTextField.getText();
             Integer number = null;
 
+            if (subject.length() == 1 || subject.length() > 4) {
+                handleInvalidMnemonicError();
+                return;
+            }
+
             if (!numberTextField.getText().isEmpty()) {
                 try {
                     number = Integer.parseInt(numberTextField.getText());
@@ -119,6 +124,11 @@ public class CourseSearchController {
     private void handleInvalidInputError() {
         courseSearchError.setStyle("-fx-text-fill: red;");
         courseSearchError.setText("Invalid input for the course number. Please enter a valid integer.");
+    }
+
+    private void handleInvalidMnemonicError() {
+        courseSearchError.setStyle("-fx-text-fill: red;");
+        courseSearchError.setText("Invalid input for the course mnemonic. Please enter a mnemonic between 2-4 characters.");
     }
 
     public void handleCourseSearchError() {
