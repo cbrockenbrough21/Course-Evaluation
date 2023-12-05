@@ -168,6 +168,7 @@ public class ReviewsController {
             if (activeReview == null){
                 reviewsService.addReview(activeUser.getId(), activeCourse.getCourseId(), choice, commentString);
                 setAvgRating();
+                setActiveCourseLabel();
                 submitLabel.setText("Successfully submitted review!");
                 submitLabel.setVisible(true);
                 submitButton.setText("Save");
@@ -176,11 +177,13 @@ public class ReviewsController {
             else {
                 reviewsService.updateReview(activeReview.getReviewID(), choice, commentString);
                 setAvgRating();
+                setActiveCourseLabel();
                 submitLabel.setText("Successfully updated review!");
                 submitLabel.setVisible(true);
             }
             deleteButton.setVisible(true);
             updateTable();
+
 
         }
     }
@@ -190,6 +193,7 @@ public class ReviewsController {
             ReviewsService reviewsService = new ReviewsService();
             reviewsService.deleteReview(activeReview.getReviewID());
             setAvgRating();
+            setActiveCourseLabel();
             activeReview = null;
             updateTable();
             setUserReview();
