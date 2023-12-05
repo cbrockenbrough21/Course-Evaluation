@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.*;
 
-public class CourseReviewsService {
+public class ReviewsService {
 
 
     public List<Review> getReviewList(Course course){
@@ -131,7 +131,7 @@ public class CourseReviewsService {
         return rating;
     }
 
-    public void displayAverageRating(CourseReviewsService service, List<Course> courseList) {
+    public void displayAverageRating(ReviewsService service, List<Course> courseList) {
         for (Course course : courseList) {
             double cum_rating = 0.0;
             int rev_count = 0;
