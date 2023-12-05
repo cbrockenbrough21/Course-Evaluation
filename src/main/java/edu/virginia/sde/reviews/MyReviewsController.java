@@ -56,7 +56,6 @@ public class MyReviewsController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        //System.out.println("Clicked on row with title: " + selectedReview.getSubject());
     }
     public void handleBackButton() {
         //scene switch back to course search from My Reviews
