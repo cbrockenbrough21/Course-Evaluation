@@ -31,18 +31,16 @@ public class CreateUserController {
             return;
         }
 
-       else if(enteredUsername.trim().isEmpty()){
+        enteredUsername = enteredUsername.trim();
+        enteredPassword = enteredPassword.trim();
+
+        if (enteredUsername.isEmpty()) {
             handleInvalidEntryError();
             return;
         }
 
-        else if (enteredPassword.length() < 8 || enteredPassword.trim().length() < 8){
+        if (enteredPassword.length() < 8) {
             handleWrongPasswordLength();
-            return;
-        }
-
-        else if(enteredUsername.isEmpty()){
-            handleInvalidEntryError();
             return;
         }
 
@@ -63,17 +61,17 @@ public class CreateUserController {
 
     public void handleUserExistsError(){
         createAccountLabel.setStyle("-fx-text-fill: red;");
-        createAccountLabel.setText("Username already exists.");
+        createAccountLabel.setText("Username already exists (adding trailing/leading spaces to an existing username won't make it different).");
     }
 
     public void handleInvalidEntryError(){
         createAccountLabel.setStyle("-fx-text-fill: red;");
-        createAccountLabel.setText("Invalid Username or Password. Please try again.");
+        createAccountLabel.setText("Invalid Username or Password. Username must be at least 1 character (excluding trailing/leading spaces). Please try again.");
     }
 
     public void handleWrongPasswordLength(){
         createAccountLabel.setStyle("-fx-text-fill: red;");
-        createAccountLabel.setText("Password must be 8 characters.");
+        createAccountLabel.setText("Password must be at least 8 characters (excluding leading/trailing spaces).");
     }
 
     public void handleAccountCreated(){
