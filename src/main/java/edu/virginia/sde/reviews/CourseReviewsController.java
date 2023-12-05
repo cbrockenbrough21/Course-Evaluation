@@ -75,15 +75,31 @@ public class CourseReviewsController {
     public void updateTable(){
         var courseReviewsService = new CourseReviewsService();
         List<Review> reviewList = courseReviewsService.getReviewList(activeCourse);
-
         ObservableList<Review> obsList = FXCollections.observableList(reviewList);
         tableView.getItems().clear();
         tableView.getItems().addAll(obsList);
     }
 
-    public void setActiveCourseLabel(){
+    public void setActiveCourseLabel() {
+        updateAvgRating();
         activeCourseLabel.setStyle("-fx-text-fill: navy;");
-        activeCourseLabel.setText(activeCourse.toString());
+        activeCourseLabel.setText(activeCourse.toString() + " - " + "Average Rating: " + activeCourse.getRating());
+    }
+
+    public void updateAvgRating() {
+        var courseReviewsService = new CourseReviewsService();
+        double cum_rating = 0.0;
+        int rev_count = 0;
+        List<Review> courseReviews = courseReviewsService.getReviewList(activeCourse);
+        for (Review review : courseReviews) {
+            rev_count++;
+            cum_rating = cum_rating + review.getRating();
+        }
+        String avg = String.format("%.2f", (cum_rating / rev_count));
+        if (courseReviews.isEmpty()) {
+            avg = "";
+        }
+        activeCourse.setRating(avg);
     }
 
     public void setUserReview(){
