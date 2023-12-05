@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
@@ -8,22 +9,42 @@
    <children>
       <VBox layoutX="2.0" layoutY="5.0" prefHeight="394.0" prefWidth="600.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#handleLogOutButton" text="Log Out" />
-            <Button mnemonicParsing="false" onAction="#handleMyReviewsButton" text="My Reviews" />
-            <Button mnemonicParsing="false" onAction="#handleAddCourseButton" text="Add course" />
-             <HBox prefHeight="79.0" prefWidth="600.0">
-                 <children>
-                     <Label text="Subject" />
-                     <TextField fx:id="subjectTextField" prefHeight="26.0" prefWidth="84.0" />
-                     <Label text="Number" />
-                     <TextField fx:id="numberTextField" prefHeight="26.0" prefWidth="94.0" />
-                     <Label text="Title" />
-                     <TextField fx:id="titleTextField" />
-                     <Button mnemonicParsing="false" onAction="#handleSearchButton" text="Search" />
-                 </children>
+             <HBox>
+                 <Button mnemonicParsing="false" onAction="#handleLogOutButton" text="Log Out" />
+                 <Button mnemonicParsing="false" onAction="#handleMyReviewsButton" text="My Reviews">
+                  <HBox.margin>
+                     <Insets left="20.0" right="20.0" />
+                  </HBox.margin></Button>
+                 <Button mnemonicParsing="false" onAction="#handleAddCourseButton" text="Add course" />
+               <padding>
+                  <Insets bottom="20.0" left="5.0" top="5.0" />
+               </padding>
              </HBox>
-            <Label fx:id="courseSearchError" />
-            <TableView fx:id="tableView" prefHeight="315.0" prefWidth="600.0">
+             <HBox>
+                 <children>
+                     <Label text="Subject: " />
+                     <TextField fx:id="subjectTextField" prefHeight="26.0" prefWidth="70.0" />
+                     <Label text="Number: ">
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding></Label>
+                     <TextField fx:id="numberTextField" prefHeight="26.0" prefWidth="71.0" />
+                     <Label text="Title: ">
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding></Label>
+                     <TextField fx:id="titleTextField" />
+                     <Button mnemonicParsing="false" onAction="#handleSearchButton" prefHeight="26.0" prefWidth="68.0" text="Search" />
+                 </children>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+             </HBox>
+            <Label fx:id="courseSearchError">
+               <padding>
+                  <Insets bottom="3.0" top="3.0" />
+               </padding></Label>
+            <TableView fx:id="tableView" prefHeight="305.0" prefWidth="600.0">
               <columns>
                   <TableColumn text="Subject">
                       <cellValueFactory><PropertyValueFactory property="subject" />
