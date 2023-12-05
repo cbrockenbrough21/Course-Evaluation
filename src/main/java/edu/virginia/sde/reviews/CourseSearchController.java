@@ -88,7 +88,7 @@ public class CourseSearchController {
             String subject = subjectTextField.getText();
             Integer number = null;
 
-            if (subject.length() < 2 || subject.length() > 4) {
+            if (subject.length() == 1 || subject.length() > 4) {
                 handleInvalidMnemonicError();
                 return;
             }
