@@ -22,7 +22,7 @@
                      <Button mnemonicParsing="false" onAction="#handleSearchButton" text="Search" />
                  </children>
              </HBox>
-            <Label text="Search Warning Message - Will make this invisible later but just to see for now" />
+            <Label fx:id="courseSearchError" />
             <TableView fx:id="tableView" prefHeight="315.0" prefWidth="600.0">
               <columns>
                   <TableColumn text="Subject">
