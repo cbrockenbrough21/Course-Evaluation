@@ -61,7 +61,7 @@ public class CreateUserController {
 
     public void handleUserExistsError(){
         createAccountLabel.setStyle("-fx-text-fill: red;");
-        createAccountLabel.setText("Username already exists (adding trailing/leading spaces to an existing username won't make it different).");
+        createAccountLabel.setText("Username already exists (note that adding trailing/leading spaces to an existing username won't make it different).");
     }
 
     public void handleInvalidEntryError(){
