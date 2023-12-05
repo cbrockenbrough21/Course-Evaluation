@@ -9,7 +9,7 @@
 
 ## To Run
 
-[Add a brief description of which .java file to run, and what vm arguments are needed]
+Run CourseReviewsApplication.java to start the program. VM arguments should be --module-path [Path to JavaFX folder] --add-modules javafx.controls,javafx.fxml.
 
 ## Contributions
 
