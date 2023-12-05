@@ -67,7 +67,7 @@ public class AddCourseService {
 
     public boolean isCourseInDatabase(List<Course> allCourses, String subject, int course_number, String title) {
         for (Course course : allCourses) {
-            if ((course.getCourseNumber() == course_number) && (course.getTitle().equals(title))) {
+            if ((course.getSubject().equalsIgnoreCase(subject)) && (course.getCourseNumber() == course_number) && (course.getTitle().equalsIgnoreCase(title))) {
                 return true;
             }
         }

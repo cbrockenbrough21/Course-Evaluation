@@ -31,10 +31,8 @@ public class LoginController {
     public void displayLogin(Stage stage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        //stage.setTitle("Login");
         stage.setScene(scene);
         stage.show();
-        var loginService = new LoginService(); //fix this
     }
 
     public void handleLoginButton() {
@@ -42,17 +40,16 @@ public class LoginController {
         String enteredUsername = username.getText();
         String enteredPassword = password.getText();
 
-        if(enteredPassword.equals("") || enteredUsername.equals("")){
+        if(enteredPassword.isEmpty() || enteredUsername.isEmpty()){
             handleLoginError();
-            return;
         }
 
         else{
+            loginError.setText("");
             boolean matches = loginService.UsernamePasswordMatches(enteredUsername, enteredPassword);
             if(matches){
                 User newUser = new User(enteredUsername, enteredPassword, loginService.getUserID(enteredUsername));
                 try {
-                    loginService = new LoginService();
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-search.fxml"));
                     Scene scene = new Scene(fxmlLoader.load());
                     var controller = (CourseSearchController) fxmlLoader.getController();
@@ -67,7 +64,6 @@ public class LoginController {
             }
             else{
                 handleLoginError();
-                return;
             }
         }
     }
@@ -80,7 +76,6 @@ public class LoginController {
     public void handleCreateAccountButton(){
         //leads to a popup window where they enter password/username
         try {
-            var loginService = new LoginService();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("create-user.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             var controller = (CreateUserController) fxmlLoader.getController();
