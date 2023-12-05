@@ -14,7 +14,7 @@ public class CreateUserController {
     @FXML
     public TextField username;
     @FXML
-    public TextField password;
+    public PasswordField password;
     @FXML
     public Label createAccountLabel;
     private User activeUser;

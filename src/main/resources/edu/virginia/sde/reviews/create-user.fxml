@@ -23,7 +23,7 @@
               <Label text="New Username" GridPane.columnIndex="0" GridPane.rowIndex="0" />
               <TextField fx:id="username" prefHeight="26.0" prefWidth="34.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="0" />
               <Label text="New Password" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-              <TextField fx:id="password" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+              <PasswordField fx:id="password" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
           </children>
       </GridPane>
       <VBox layoutX="190.0" layoutY="150.0" prefHeight="45.0" prefWidth="200.0">
