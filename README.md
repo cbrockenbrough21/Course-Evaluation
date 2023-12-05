@@ -21,7 +21,9 @@ List the primary contributions of each author. It is recommended to update this 
 * Added close button on login page
 * Converted timestamp to local time and added to reviews tables
 * Added error messages for user creation
-* Helped build database tables
+* Built original structure of database tables
+* Helped edit database tables to new structure
+* Tested that all wrong inputs give error messages
 
 ### Catherine Brockenbrough
 
