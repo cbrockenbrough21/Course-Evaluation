@@ -43,7 +43,7 @@ public class MyReviewsController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-review.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
-            var controller = (CourseReviewsController) fxmlLoader.getController();
+            var controller = (ReviewsController) fxmlLoader.getController();
             controller.setActiveCourse(selectedReview.getCourse());
             controller.setActiveCourseLabel();
             controller.setActiveUser(activeUser);
@@ -56,7 +56,6 @@ public class MyReviewsController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        //System.out.println("Clicked on row with title: " + selectedReview.getSubject());
     }
     public void handleBackButton() {
         //scene switch back to course search from My Reviews

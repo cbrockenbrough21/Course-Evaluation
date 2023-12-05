@@ -9,7 +9,7 @@
 
 ## To Run
 
-[Add a brief description of which .java file to run, and what vm arguments are needed]
+Run CourseReviewsApplication.java to start the program. VM arguments should be --module-path [Path to JavaFX folder] --add-modules javafx.controls,javafx.fxml.
 
 ## Contributions
 
@@ -17,9 +17,13 @@ List the primary contributions of each author. It is recommended to update this 
 
 ### Riley Wilson
 
-* Author 1 contributions
-* as a bulleted list
-* each line starts with an asterisk and a space
+* Built feature where you can search course by subject, number, and title
+* Added close button on login page
+* Converted timestamp to local time and added to reviews tables
+* Added error messages for user creation
+* Built original structure of database tables
+* Helped edit database tables to new structure
+* Tested that all wrong inputs give error messages
 
 ### Catherine Brockenbrough
 

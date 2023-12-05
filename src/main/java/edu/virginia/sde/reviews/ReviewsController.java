@@ -9,10 +9,9 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
-public class CourseReviewsController {
+public class ReviewsController {
     @FXML
     public Label activeCourseLabel;
 
@@ -73,24 +72,40 @@ public class CourseReviewsController {
     }
 
     public void updateTable(){
-        var courseReviewsService = new CourseReviewsService();
+        var courseReviewsService = new ReviewsService();
         List<Review> reviewList = courseReviewsService.getReviewList(activeCourse);
-
         ObservableList<Review> obsList = FXCollections.observableList(reviewList);
         tableView.getItems().clear();
         tableView.getItems().addAll(obsList);
     }
 
-    public void setActiveCourseLabel(){
+    public void setActiveCourseLabel() {
+        setAvgRating();
         activeCourseLabel.setStyle("-fx-text-fill: navy;");
-        activeCourseLabel.setText(activeCourse.toString());
+        activeCourseLabel.setText(activeCourse.toString() + " - " + "Average Rating: " + activeCourse.getRating());
+    }
+
+    public void setAvgRating() {
+        var courseReviewsService = new ReviewsService();
+        double cum_rating = 0.0;
+        int rev_count = 0;
+        List<Review> courseReviews = courseReviewsService.getReviewList(activeCourse);
+        for (Review review : courseReviews) {
+            rev_count++;
+            cum_rating = cum_rating + review.getRating();
+        }
+        String avg = String.format("%.2f", (cum_rating / rev_count));
+        if (courseReviews.isEmpty()) {
+            avg = "";
+        }
+        activeCourse.setRating(avg);
     }
 
     public void setUserReview(){
-        CourseReviewsService courseReviewsService = new CourseReviewsService();
-        activeReview = courseReviewsService.getUserReview(activeUser.getId(), activeCourse.getCourseId());
+        ReviewsService reviewsService = new ReviewsService();
+        activeReview = reviewsService.getUserReview(activeUser.getId(), activeCourse.getCourseId());
         if (activeReview != null){
-            submitButton.setText("Resubmit");
+            submitButton.setText("Save");
             deleteButton.setVisible(true);
             comment.setText(activeReview.getComment());
             switch(activeReview.getRating()) {
@@ -141,37 +156,44 @@ public class CourseReviewsController {
     }
 
     public void handleSubmitReviewButton(){
-        CourseReviewsService courseReviewsService = new CourseReviewsService();
+        ReviewsService reviewsService = new ReviewsService();
         var toggle = (RadioButton) buttonGroup.getSelectedToggle();
         if (toggle == null){
             submitLabel.setText("Did not choose rating");
             submitLabel.setVisible(true);
         }
         else {
-            String choice = toggle.getText();
+            String choice = toggle.getId();
             String commentString = comment.getText();
             if (activeReview == null){
-                courseReviewsService.addReview(activeUser.getId(), activeCourse.getCourseId(), choice, commentString);
+                reviewsService.addReview(activeUser.getId(), activeCourse.getCourseId(), choice, commentString);
+                setAvgRating();
+                setActiveCourseLabel();
                 submitLabel.setText("Successfully submitted review!");
                 submitLabel.setVisible(true);
-                submitButton.setText("Resubmit");
-                activeReview = courseReviewsService.getUserReview(activeUser.getId(), activeCourse.getCourseId());
+                submitButton.setText("Save");
+                activeReview = reviewsService.getUserReview(activeUser.getId(), activeCourse.getCourseId());
             }
             else {
-                courseReviewsService.updateReview(activeReview.getReviewID(), choice, commentString);
+                reviewsService.updateReview(activeReview.getReviewID(), choice, commentString);
+                setAvgRating();
+                setActiveCourseLabel();
                 submitLabel.setText("Successfully updated review!");
                 submitLabel.setVisible(true);
             }
             deleteButton.setVisible(true);
             updateTable();
 
+
         }
     }
 
     public void handleDeleteReviewButton(){
         if (activeReview != null){
-            CourseReviewsService courseReviewsService = new CourseReviewsService();
-            courseReviewsService.deleteReview(activeReview.getReviewID());
+            ReviewsService reviewsService = new ReviewsService();
+            reviewsService.deleteReview(activeReview.getReviewID());
+            setAvgRating();
+            setActiveCourseLabel();
             activeReview = null;
             updateTable();
             setUserReview();

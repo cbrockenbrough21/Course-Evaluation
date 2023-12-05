@@ -63,6 +63,7 @@ public class AddCourseController{
                               addCourseService.isValidCourseNumber(numberString) &&
                               addCourseService.isValidTitle(titleString);
         if (!validCourse) {
+            courseAddLabel.setStyle("-fx-text-fill: red;");
             courseAddLabel.setText("Unable to add the course because invalid input. Please try again. ");
             courseAddLabel.setVisible(true);
         }
@@ -75,6 +76,7 @@ public class AddCourseController{
                 handleCourseAdded();
             }
             else {
+                courseAddLabel.setStyle("-fx-text-fill: red;");
                 courseAddLabel.setText("The course already exists. Please visit Course from Course Search.");
                 courseAddLabel.setVisible(true);
             }

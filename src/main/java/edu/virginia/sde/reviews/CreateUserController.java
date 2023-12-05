@@ -41,7 +41,7 @@ public class CreateUserController {
             return;
         }
 
-        else if(enteredUsername.equals("") || enteredPassword.equals("")){
+        else if(enteredUsername.isEmpty()){
             handleInvalidEntryError();
             return;
         }
@@ -89,7 +89,7 @@ public class CreateUserController {
             var controller = (LoginController) fxmlLoader.getController();
             controller.setActiveUser(activeUser);
             controller.setPrimaryStage(primaryStage);
-            primaryStage.setTitle("Course Search");
+            primaryStage.setTitle("Login");
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {

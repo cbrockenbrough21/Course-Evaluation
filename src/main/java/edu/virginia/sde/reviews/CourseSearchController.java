@@ -1,6 +1,7 @@
 package edu.virginia.sde.reviews;
 
 import javafx.collections.FXCollections;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,17 +10,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-import java.lang.reflect.InvocationTargetException;
 
 import java.io.IOException;;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class CourseSearchController {
     DatabaseConnection databaseConnection;
+    @FXML
+    private Label courseSearchError;
+
     @FXML
     private TableView<Course> tableView;
 
@@ -64,7 +65,7 @@ public class CourseSearchController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("course-review.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
-            var controller = (CourseReviewsController) fxmlLoader.getController();
+            var controller = (ReviewsController) fxmlLoader.getController();
             controller.setActiveCourse(selectedCourse);
             controller.setActiveCourseLabel();
             controller.setActiveUser(activeUser);
@@ -83,23 +84,32 @@ public class CourseSearchController {
     //Display the list of courses given the current subject, number, title in the text boxes
     public void handleSearchButton(){
         try{
+            courseSearchError.setText("");
             String subject = subjectTextField.getText();
             Integer number = numberTextField.getText().isEmpty() ? null : Integer.parseInt(numberTextField.getText());
             String title = titleTextField.getText();
 
             var courseSearchService = new CourseSearchService();
-            var courseReviewService = new CourseReviewsService();
+            var courseReviewService = new ReviewsService();
             List<Course> searchResults = courseSearchService.findAllCourses(subject, number, title);
             courseReviewService.displayAverageRating(courseReviewService, searchResults);
 
             ObservableList<Course> obsList = FXCollections.observableList(searchResults);
             tableView.getItems().clear();
             tableView.getItems().addAll(obsList);
+
+            if (searchResults.isEmpty()) {
+                handleCourseSearchError();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    public void handleCourseSearchError() {
+        courseSearchError.setStyle("-fx-text-fill: red;");
+        courseSearchError.setText("No course meets search criteria. Please add course through 'Add Course Window'.");
+    }
     public void handleLogOutButton(){
         //scene switch to log in page
         try {
@@ -149,7 +159,7 @@ public class CourseSearchController {
 
     public void updateTable(){
         var courseSearchService = new CourseSearchService();
-        var courseReviewService = new CourseReviewsService();
+        var courseReviewService = new ReviewsService();
         List<Course> courseList = courseSearchService.getCourses();
         courseReviewService.displayAverageRating(courseReviewService, courseList);
         ObservableList<Course> obsList = FXCollections.observableList(courseList);
