@@ -1,6 +1,7 @@
 package edu.virginia.sde.reviews;
 
 import javafx.collections.FXCollections;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,6 +21,9 @@ import java.util.List;
 
 public class CourseSearchController {
     DatabaseConnection databaseConnection;
+    @FXML
+    private Label courseSearchError;
+
     @FXML
     private TableView<Course> tableView;
 
@@ -83,6 +87,7 @@ public class CourseSearchController {
     //Display the list of courses given the current subject, number, title in the text boxes
     public void handleSearchButton(){
         try{
+            courseSearchError.setText("");
             String subject = subjectTextField.getText();
             Integer number = numberTextField.getText().isEmpty() ? null : Integer.parseInt(numberTextField.getText());
             String title = titleTextField.getText();
@@ -95,11 +100,19 @@ public class CourseSearchController {
             ObservableList<Course> obsList = FXCollections.observableList(searchResults);
             tableView.getItems().clear();
             tableView.getItems().addAll(obsList);
+
+            if (searchResults.isEmpty()) {
+                handleCourseSearchError();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    public void handleCourseSearchError() {
+        courseSearchError.setStyle("-fx-text-fill: red;");
+        courseSearchError.setText("No course meets search criteria. Please add course through 'Add Course Window'.");
+    }
     public void handleLogOutButton(){
         //scene switch to log in page
         try {
