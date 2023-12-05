@@ -37,9 +37,14 @@ List the primary contributions of each author. It is recommended to update this 
 
 ### Laine Quillian
 
-* Author 3 contributions
-* as a bulleted list
-* each line starts with an asterisk and a space
+* connected the add Course page to the database to add new Courses -- displayed appropriate error messages
+    if the course was already added or if there was invalid input
+* helped format the My Review fxml
+* Reformatted Course Database for constraints at software rather than database level
+* Displayed average review on the course search page
+* Displayed average review for the active course in course reviews to simultaneously update
+* Changed the password field in the login screen to block the text
+* Formatted course search warming to only display with improper searches
 
 ### Olivia Warren
 
