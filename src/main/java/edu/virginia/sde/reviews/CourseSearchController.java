@@ -123,17 +123,17 @@ public class CourseSearchController {
 
     private void handleInvalidInputError() {
         courseSearchError.setStyle("-fx-text-fill: red;");
-        courseSearchError.setText("Invalid input for the course number. Please enter a valid integer.");
+        courseSearchError.setText("Invalid input for the course number. Please enter a valid integer without trailing/leading spaces.");
     }
 
     private void handleInvalidMnemonicError() {
         courseSearchError.setStyle("-fx-text-fill: red;");
-        courseSearchError.setText("Invalid input for the course mnemonic. Please enter a mnemonic between 2-4 characters.");
+        courseSearchError.setText("Invalid input for the course mnemonic. Please enter a mnemonic between 2-4 characters (no trailing/leading spaces).");
     }
 
     public void handleCourseSearchError() {
         courseSearchError.setStyle("-fx-text-fill: red;");
-        courseSearchError.setText("No course meets search criteria. Please add course through 'Add Course Window'.");
+        courseSearchError.setText("No course meets search criteria. Please delete trailing/leading spaces or add course through 'Add Course Window'.");
     }
     public void handleLogOutButton(){
         //scene switch to log in page
