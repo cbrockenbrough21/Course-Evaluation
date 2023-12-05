@@ -101,6 +101,8 @@ public class DatabaseConnection {
 
     public void addCourse(String subject, int course_number, String title) throws SQLException {
         try {
+
+            subject = subject.toUpperCase();
             var statement = connection.prepareStatement(
                     """
                             INSERT INTO COURSES(subject, number, title)
